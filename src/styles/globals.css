@@ -1,0 +1,111 @@
+/* GLOBAL THEMING -------------------------------------------- */
+
+:root {
+  --background: rgb(34, 34, 34);
+  font-family: 'Roboto Slab', 'Arial';
+
+  --header-background: #325d85;
+  --button-text-color: #ffffff;
+  --input-text-color: #ffffff;
+
+  --scrollbar-background: #686868;
+  --scrollbar-hover-background: #797979;
+  --scrollbar-track-background: #1d1d1d;
+
+  --scrollbar-modal-background: #4d4d4d;
+  --scrollbar-modal-hover-background: #797979;
+  --scrollbar-modal-track-background: #1d1d1d;
+}
+
+[data-theme='light'] {
+  --background: radial-gradient(
+    circle 815px at 0% 0%,
+    rgb(216, 221, 235) 0.2%,
+    rgb(214, 214, 214) 100%
+  );
+
+  --header-background: white;
+  --button-text-color: #000000;
+  --input-text-color: #000000;
+
+  --scrollbar-background: #797979;
+  --scrollbar-hover-background: #444444;
+  --scrollbar-track-background: #f7f7f7;
+
+  --scrollbar-modal-background: #b3b3b3;
+  --scrollbar-modal-hover-background: #919191;
+  --scrollbar-modal-track-background: #f7f7f7;
+}
+
+/* GENERAL ------------------------------------------------ */
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  background: var(--background) !important;
+}
+
+body {
+  min-height: calc(100dvh - 68px);
+  background: var(--background) !important;
+}
+
+main {
+  flex: 1 0 auto;
+  scroll-margin-top: 64px;
+}
+
+footer {
+  flex-shrink: 0;
+  padding: 1rem 0 0.5rem 0;
+}
+
+input:not([type='checkbox']),
+textarea {
+  color: var(--input-text-color) !important;
+}
+
+/* GLOBAL COMPONENTS ----------------------------------- */
+
+.loading-page {
+  height: calc(100vh - 150px);
+}
+
+/* SCROLLBAR ------------------------------------- */
+
+::-webkit-scrollbar {
+  height: 5px;
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-background);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-background);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-hover-background);
+}
+
+.modal {
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-modal-track-background);
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-modal-background);
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-modal-hover-background);
+  }
+}

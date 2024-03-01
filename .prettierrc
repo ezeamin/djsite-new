@@ -1,0 +1,30 @@
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "endOfLine": "lf",
+  "importOrder": [
+    "(react$|next$|next(?!-)[^/]*/)",
+    "<THIRD_PARTY_MODULES>",
+    "(.|^@)/app",
+    "(.|^@)/redux/store(?!\\/interface)(?!.*types)",
+    "(.|^@)/redux/hooks(?!\\/interface)(?!.*types)",
+    "(.|^@)/redux/slices(?!\\/interface)(?!.*types)",
+    "(.|^@)/redux/apiSlices(?!\\/interface)(?!.*types)",
+    "(.|^@)/hooks(?!\\/interface)(?!.*types)",
+    "(.|^@)/components(?!\\/interface)",
+    "(.|^@)/(utilities|constants)(?!\\/interface)(?!.*types)",
+    "(.|^@)/forms(?!\\/interface)(?!.*types)",
+    "(.|^@)/adapters(?!\\/interface)(?!.*types)",
+    "(.|^@)/dti(?!\\/interface)(?!.*types)",
+    "(.|^@)/(styles|.*\\/styles)",
+    "(.|^@)(interface|.*\\/interface|types|.*types)"
+  ],
+  "importOrderSeparation": true,
+  "importOrderCaseInsensitive": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ]
+}

@@ -1,0 +1,109 @@
+/* ANIMATIONS ----------------------------------- */
+
+.animate-in-bottom {
+  animation: in-keyframes-bottom 0.75s both;
+}
+
+.animate-in-right {
+  animation: in-keyframes-right 0.75s both;
+}
+
+.animate-in-left {
+  animation: in-keyframes-left 0.75s both;
+}
+
+.animate-in-top {
+  animation: in-keyframes-top 0.5s both;
+}
+
+@keyframes in-keyframes-bottom {
+  0% {
+    opacity: 0;
+    translate: 0 25%;
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes in-keyframes-right {
+  0% {
+    opacity: 0;
+    translate: 10% 0;
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes in-keyframes-left {
+  0% {
+    opacity: 0;
+    translate: -15% 0;
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes in-keyframes-top {
+  0% {
+    opacity: 0;
+    translate: 0 -10%;
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.a-delay-50 {
+  animation-delay: 50ms;
+}
+
+.a-delay-100 {
+  animation-delay: 100ms;
+}
+
+.a-delay-150 {
+  animation-delay: 150ms;
+}
+
+.a-delay-200 {
+  animation-delay: 200ms;
+}
+
+.a-delay-300 {
+  animation-delay: 300ms;
+}
+
+.a-delay-400 {
+  animation-delay: 400ms;
+}
+
+.a-delay-500 {
+  animation-delay: 500ms;
+}
+
+.a-delay-600 {
+  animation-delay: 600ms;
+}
+
+.a-delay-800 {
+  animation-delay: 800ms;
+}
+
+.a-delay-1000 {
+  animation-delay: 1000ms;
+}
+
+.a-delay-1500 {
+  animation-delay: 1500ms;
+}
+
+.a-delay-2000 {
+  animation-delay: 2000ms;
+}
