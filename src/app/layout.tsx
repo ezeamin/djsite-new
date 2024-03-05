@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   ],
   keywords: 'dj, tucuman, eventos, musica, fiestas, ezeamin, eze amin',
   description: 'Servicios de DJ para eventos - Tucumán, Arg.',
+  themeColor: '#30426b',
 };
 
 export default function RootLayout({

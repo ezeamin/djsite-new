@@ -3,13 +3,14 @@
   "name": "Dj Eze Amin",
   "icons": [
     {
-      "src": "./img/logo.webp",
+      "src": "/img/icon-manifest.webp",
       "type": "image/webp",
-      "sizes": "1225x528"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#2f2f2f",
-  "background_color": "#2f2f2f"
+  "theme_color": "#30426b",
+  "background_color": "#30426b"
 }
