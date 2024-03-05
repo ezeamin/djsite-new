@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { Spinner } from './Spinner/Spinner';
+import Spinner from './Spinner/Spinner';
 
 import type { LoadingBackdropProps } from '../interface/loading';
 

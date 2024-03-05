@@ -7,6 +7,8 @@ const copyEnv = (env: string) => {
   const envContents = fs.readFileSync(`.env.${env}`, 'utf8');
   const envProdContents = fs.readFileSync('.env.production', 'utf8');
 
+  if (!envProdContents) return;
+
   // write the contents to .env_temp
   fs.writeFileSync('.env_temp', envProdContents);
 
@@ -16,6 +18,8 @@ const copyEnv = (env: string) => {
 
 const restoreEnv = () => {
   const envProdContents = fs.readFileSync('.env_temp', 'utf8');
+
+  if (!envProdContents) return;
 
   fs.writeFileSync('.env.production', envProdContents);
   fs.unlinkSync('.env_temp');
@@ -211,7 +215,10 @@ const runPreBuildScript = async () => {
 
     if (!isLint) runBuildCommand();
   } catch (error) {
-    console.error('\n\x1b[31m❌ Pre-build script failed to complete\x1b[0m\n');
+    console.error(
+      '\n\x1b[31m❌ Pre-build script failed to complete\x1b[0m\n',
+      error
+    );
     throw new Error('Pre-build script failed to complete');
   }
 };
