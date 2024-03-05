@@ -10,7 +10,7 @@ const Option = (props: OptionProps) => {
   if (option.path.includes('http')) {
     return (
       <Link
-        className="btn w-full justify-between"
+        className="three-d-button btn w-full justify-between"
         href={option.path}
         referrerPolicy="no-referrer"
         target="_blank"
@@ -25,7 +25,10 @@ const Option = (props: OptionProps) => {
   }
 
   return (
-    <Link className="btn w-full justify-between" href={option.path}>
+    <Link
+      className="three-d-button btn w-full justify-between"
+      href={option.path}
+    >
       <span className="font-bold">{option.name}</span>
       <span>{option.icon}</span>
     </Link>

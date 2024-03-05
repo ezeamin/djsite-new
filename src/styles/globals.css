@@ -171,3 +171,8 @@ textarea {
     translate: 0 -50px;
   }
 }
+
+.three-d-button {
+  background: linear-gradient(0deg,  #b2bbcc 0%,#ffffff 100%);
+  border: 0;
+}
