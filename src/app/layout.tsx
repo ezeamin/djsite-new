@@ -2,6 +2,8 @@ import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 
+import { Toaster } from 'sonner';
+
 import Balls from '@/components/Common/Balls';
 import Glass from '@/components/Common/Glass';
 
@@ -30,6 +32,7 @@ export default function RootLayout({
       <body className={barlow.className}>
         <Glass>{children}</Glass>
         <Balls />
+        <Toaster richColors position="top-center" />
         <Analytics />
       </body>
     </html>

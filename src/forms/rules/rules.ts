@@ -444,3 +444,13 @@ export const fromDateAfterOrToday = (data: {
 fromDateAfterOrToday.msg = () => ({
   message: 'La fecha desde debe ser futura o igual a la fecha actual',
 });
+
+export const dateAfterOrToday = (data: { date: Date | string | undefined }) => {
+  if (!data.date) return true;
+  const date = dayjs(data.date);
+  return date.isAfter(dayjs()) || date.isSame(dayjs(), 'day');
+};
+
+dateAfterOrToday.msg = () => ({
+  message: 'La fecha debe ser futura o igual a la fecha de hoy',
+});

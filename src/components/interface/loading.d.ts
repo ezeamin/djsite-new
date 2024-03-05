@@ -1,4 +1,4 @@
-import { AnyProp } from '@/interface/globalTypes';
+import { AnyProp } from '@/interface';
 
 export interface LoadingBackdropProps extends AnyProp {
   open: boolean;

@@ -3,7 +3,7 @@
 :root {
   --header-background: #325d85;
   --button-text-color: #ffffff;
-  --input-text-color: #ffffff;
+  --input-text-color: #000000;
 
   --scrollbar-background: #686868;
   --scrollbar-hover-background: #797979;
@@ -135,6 +135,8 @@ textarea {
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(167, 167, 167, 0.3);
   max-width: 600px;
+  position: relative;
+  overflow: hidden;
 }
 
 .bg-ball {
@@ -173,6 +175,39 @@ textarea {
 }
 
 .three-d-button {
-  background: linear-gradient(0deg,  #b2bbcc 0%,#ffffff 100%);
+  background: linear-gradient(0deg, #b2bbcc 0%, #ffffff 100%) !important;
   border: 0;
+}
+
+.three-d-button--selected {
+  background: linear-gradient(0deg, #995959 0%, #fc8e8e 100%) !important;
+  color: #ffffff !important;
+  border: 0;
+}
+
+.three-d-button--submit {
+  background: linear-gradient(0deg, #995959 0%, #fc8e8e 100%) !important;
+  color: #ffffff !important;
+  border: 0;
+}
+
+.glass-ball {
+  width: 200px;
+  height: 200px;
+  background-color: transparent;
+  border: 2px dashed #dfdfdf;
+  border-radius: 50%;
+  position: absolute;
+  top: -6rem;
+  right: -6rem;
+  animation: Rotate 60s infinite linear;
+}
+
+@keyframes Rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

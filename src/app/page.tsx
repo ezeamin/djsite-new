@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import Title from '@/components/Common/Title';
 import Menu from '@/components/Home/Menu';
 
 import { koulen } from '@/styles/fonts';
@@ -15,9 +16,7 @@ const HomePage = () => {
         src="/img/logo.webp"
         width={150}
       />
-      <h1 className={`${koulen.className} text-4xl text-white`}>Dj Eze Amin</h1>
-      <h2 className="text-gray-300">Cachengue y Electro Pop</h2>
-      <div className="divider mb-1 mt-0 before:bg-gray-400/25 after:bg-gray-400/25" />
+      <Title subtitle="Cachengue y Electro Pop" title="Dj Eze Amin" />
       <Menu />
     </>
   );

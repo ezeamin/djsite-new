@@ -1,4 +1,4 @@
-import { ExampleSchema } from './schemas/exampleSchema';
+import { BudgetFormSchema } from './schemas/budgetFormSchema';
 
 /**
  * This folder should include all validations schemas across the project.
@@ -12,4 +12,4 @@ import { ExampleSchema } from './schemas/exampleSchema';
  */
 
 // Use | to join all validation schemas types.
-export type FormSchemas = ExampleSchema;
+export type FormSchemas = BudgetFormSchema;

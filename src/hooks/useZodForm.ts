@@ -33,7 +33,7 @@ export const useZodForm = <T extends ZodSchema>(
 
   useEffect(() => {
     Object.values(errors).forEach((error) => {
-      toast.error(error?.message?.toString() || 'Revise los campos');
+      toast.warning(error?.message?.toString() || 'Revise los campos');
     });
   }, [errors]);
 
