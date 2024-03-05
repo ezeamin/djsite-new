@@ -30,6 +30,7 @@ export default function RootLayout({
       <body className={barlow.className}>
         <Glass>{children}</Glass>
         <Balls />
+        <Analytics />
       </body>
     </html>
   );
