@@ -1,0 +1,15 @@
+{
+  "short_name": "Dj Eze Amin",
+  "name": "Dj Eze Amin",
+  "icons": [
+    {
+      "src": "./img/logo.webp",
+      "type": "image/webp",
+      "sizes": "1225x528"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#2f2f2f",
+  "background_color": "#2f2f2f"
+}

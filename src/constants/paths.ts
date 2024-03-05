@@ -1,13 +1,8 @@
 export const PATHS = {
   HOME: '/',
-  TUTORIALS: '/tutoriales',
-  INSTRUCTIVES: '/instructivos',
-  NORMATIVES: '/normativa',
-  FORMS: '/formularios',
-  FAQ: '/faq',
-};
-
-export const EXTERNAL_LINKS = {
-  PORTAL_DEL_SAE: 'https://portaldelsae.justucuman.gov.ar/',
-  PROCEEDINGS_CONSULTATION: 'https://l6.justucuman.gov.ar/',
+  BUDGET: '/budget',
+  NEXT_EVENTS: '/next-events',
+  SETS: process.env.NEXT_PUBLIC_SETS_URL || '',
+  INSTAGRAM: process.env.NEXT_PUBLIC_INSTAGRAM_URL || '',
+  CONTACT: process.env.NEXT_PUBLIC_CONTACT_URL || '',
 };

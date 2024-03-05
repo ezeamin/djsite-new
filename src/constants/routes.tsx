@@ -1,50 +1,38 @@
 import { PATHS } from './paths';
-import {
-  FaAward,
-  FaChalkboardTeacher,
-  FaClipboardList,
-  FaFileContract,
-  FaHome,
-  FaQuestionCircle,
-} from 'react-icons/fa';
+import { FaDollarSign, FaInstagram, FaMusic, FaWhatsapp } from 'react-icons/fa';
+import { FaCalendarDays } from 'react-icons/fa6';
 
 import { Route } from './interface';
 
 export const ROUTES: Record<string, Route> = {
-  HOME: {
+  BUDGET: {
     id: 1000,
-    name: 'Inicio',
-    path: PATHS.HOME,
-    icon: <FaHome />,
+    name: 'Presupuestar',
+    path: PATHS.BUDGET,
+    icon: <FaDollarSign size="1.10rem" />,
   },
-  TUTORIALS: {
-    id: 2000,
-    name: 'Tutoriales',
-    path: PATHS.TUTORIALS,
-    icon: <FaChalkboardTeacher />,
+  NEXT_EVENTS: {
+    id: 1001,
+    name: 'Próximos eventos',
+    path: PATHS.NEXT_EVENTS,
+    icon: <FaCalendarDays size="1.10rem" />,
   },
-  INSTRUCTIVES: {
-    id: 3000,
-    name: 'Instructivos',
-    path: PATHS.INSTRUCTIVES,
-    icon: <FaClipboardList />,
+  SETS: {
+    id: 1002,
+    name: 'Enganchados',
+    path: PATHS.SETS,
+    icon: <FaMusic size="1.10rem" />,
   },
-  NORMATIVES: {
-    id: 4000,
-    name: 'Normativas',
-    path: PATHS.NORMATIVES,
-    icon: <FaAward />,
+  CONTACT: {
+    id: 1003,
+    name: 'Contacto',
+    path: PATHS.CONTACT,
+    icon: <FaWhatsapp size="1.10rem" />,
   },
-  FORMS: {
-    id: 5000,
-    name: 'Formularios',
-    path: PATHS.FORMS,
-    icon: <FaFileContract />,
-  },
-  FAQ: {
-    id: 6000,
-    name: 'Preguntas Frecuentes',
-    path: PATHS.FAQ,
-    icon: <FaQuestionCircle />,
+  INSTAGRAM: {
+    id: 1004,
+    name: 'Instagram',
+    path: PATHS.INSTAGRAM,
+    icon: <FaInstagram size="1.10rem" />,
   },
 };

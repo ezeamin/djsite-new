@@ -1,9 +1,6 @@
 /* GLOBAL THEMING -------------------------------------------- */
 
 :root {
-  --background: rgb(34, 34, 34);
-  font-family: 'Roboto Slab', 'Arial';
-
   --header-background: #325d85;
   --button-text-color: #ffffff;
   --input-text-color: #ffffff;
@@ -17,37 +14,21 @@
   --scrollbar-modal-track-background: #1d1d1d;
 }
 
-[data-theme='light'] {
-  --background: radial-gradient(
-    circle 815px at 0% 0%,
-    rgb(216, 221, 235) 0.2%,
-    rgb(214, 214, 214) 100%
-  );
-
-  --header-background: white;
-  --button-text-color: #000000;
-  --input-text-color: #000000;
-
-  --scrollbar-background: #797979;
-  --scrollbar-hover-background: #444444;
-  --scrollbar-track-background: #f7f7f7;
-
-  --scrollbar-modal-background: #b3b3b3;
-  --scrollbar-modal-hover-background: #919191;
-  --scrollbar-modal-track-background: #f7f7f7;
-}
-
 /* GENERAL ------------------------------------------------ */
 
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  background: var(--background) !important;
+  background: linear-gradient(90deg, #324f91 0%, #101d36 100%);
+  background-size: 200% 200%;
+  -webkit-animation: BackgroundAnimation 15s ease infinite;
+  -moz-animation: BackgroundAnimation 15s ease infinite;
+  animation: BackgroundAnimation 15s ease infinite;
 }
 
 body {
-  min-height: calc(100dvh - 68px);
-  background: var(--background) !important;
+  min-height: 100dvh;
+  overflow-x: hidden;
 }
 
 main {
@@ -65,6 +46,41 @@ textarea {
   color: var(--input-text-color) !important;
 }
 
+/* BACKGROUND ----------------------------------- */
+
+@-webkit-keyframes BackgroundAnimation {
+  0% {
+    background-position: 0% 87%;
+  }
+  50% {
+    background-position: 100% 14%;
+  }
+  100% {
+    background-position: 0% 87%;
+  }
+}
+@-moz-keyframes BackgroundAnimation {
+  0% {
+    background-position: 0% 87%;
+  }
+  50% {
+    background-position: 100% 14%;
+  }
+  100% {
+    background-position: 0% 87%;
+  }
+}
+@keyframes BackgroundAnimation {
+  0% {
+    background-position: 0% 87%;
+  }
+  50% {
+    background-position: 100% 14%;
+  }
+  100% {
+    background-position: 0% 87%;
+  }
+}
 /* GLOBAL COMPONENTS ----------------------------------- */
 
 .loading-page {
@@ -107,5 +123,50 @@ textarea {
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: var(--scrollbar-modal-hover-background);
+  }
+}
+
+/* UTILITIES */
+
+.bg-glass {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.11);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(167, 167, 167, 0.3);
+}
+
+.bg-ball {
+  animation: BallMovement 10s infinite alternate;
+
+  &:first-child {
+    animation-delay: 0s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 10s;
+  }
+
+  &:nth-child(3) {
+    animation: BallMovementToTop 10s infinite alternate;
+    animation-delay: 13s;
+  }
+}
+
+@keyframes BallMovement {
+  0% {
+    translate: 0 0;
+  }
+  100% {
+    translate: 0 50px;
+  }
+}
+
+@keyframes BallMovementToTop {
+  0% {
+    translate: 0 0;
+  }
+  100% {
+    translate: 0 -50px;
   }
 }

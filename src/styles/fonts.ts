@@ -1,7 +1,13 @@
-import { Roboto_Slab } from 'next/font/google';
+import { Barlow, Koulen } from 'next/font/google';
 
-export const robotoSlab = Roboto_Slab({
+export const koulen = Koulen({
   weight: '400',
+  style: 'normal',
+  subsets: ['latin'],
+});
+
+export const barlow = Barlow({
+  weight: ['400', '500', '600', '700'],
   style: 'normal',
   subsets: ['latin'],
 });
