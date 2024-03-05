@@ -20,9 +20,9 @@ const LoadingPage = (): JSX.Element => {
 
   return (
     <div className="loading-page flex w-full flex-col items-center justify-center">
-      <Spinner useTheme />
+      <Spinner />
       <p
-        className="text-dark text-center"
+        className="text-center text-white"
         style={{
           transition: 'all 1s',
           marginTop: '-5rem',
