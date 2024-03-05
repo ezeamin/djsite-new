@@ -12,7 +12,7 @@ const HomePage = () => {
         alt="logo dj eze amin"
         className="mb-3 mt-5"
         height={75}
-        src="../assets/logo.webp"
+        src="/img/logo.webp"
         width={150}
       />
       <h1 className={`${koulen.className} text-4xl text-white`}>Dj Eze Amin</h1>
