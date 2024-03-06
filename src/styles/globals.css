@@ -19,7 +19,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  background: linear-gradient(90deg, #324f91 0%, #101d36 100%);
+  background: linear-gradient(90deg, #192a52 0%, #0a1529 100%);
   background-size: 200% 200%;
   -webkit-animation: BackgroundAnimation 15s ease infinite;
   -moz-animation: BackgroundAnimation 15s ease infinite;
