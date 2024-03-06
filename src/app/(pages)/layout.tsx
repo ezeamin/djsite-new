@@ -4,6 +4,8 @@ import { ReactNode } from 'react';
 
 import { FaHome } from 'react-icons/fa';
 
+import BackButton from '@/components/Common/BackButton';
+
 import { PATHS } from '@/constants/paths';
 
 const layout = ({ children }: { children: ReactNode }) => {
@@ -22,6 +24,7 @@ const layout = ({ children }: { children: ReactNode }) => {
         </Link>
       </header>
       <section>{children}</section>
+      <BackButton />
     </>
   );
 };
