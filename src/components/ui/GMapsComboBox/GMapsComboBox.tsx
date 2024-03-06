@@ -1,14 +1,14 @@
-import ComboBox from '@/components/ui/ComboBox/ComboBox';
+import GMCB from '@/components/ui/GMapsComboBox/ComboBox/GMCB';
 import InputController from '@/components/ui/InputController/InputController';
 
 import { cn } from '@/utilities';
 
 import type { FormSchemas } from '@/forms';
 
-import type { ComboBoxInputProps } from './ComboBoxInput.types';
+import type { GMapsComboBoxProps } from './GMapsComboBox.types';
 
-const ComboBoxInput = <T extends FormSchemas>(
-  props: ComboBoxInputProps<T>
+const GMapsComboBox = <T extends FormSchemas>(
+  props: GMapsComboBoxProps<T>
 ): JSX.Element => {
   const {
     className = '',
@@ -18,8 +18,13 @@ const ComboBoxInput = <T extends FormSchemas>(
     inputClassName = '',
     name,
     label,
+    loading = false,
     options = [],
     placeholder,
+    query,
+    setQuery,
+    getInputProps,
+    getSuggestionItemProps,
     ...rest
   } = props;
 
@@ -35,15 +40,20 @@ const ComboBoxInput = <T extends FormSchemas>(
         defaultValue={null}
         name={name}
         render={({ field, fieldState: { error } }) => (
-          <ComboBox<T>
+          <GMCB<T>
             controller={field}
             disabled={rest.disabled}
             error={!!error}
+            getInputProps={getInputProps}
+            getSuggestionItemProps={getSuggestionItemProps}
             id={name as string}
             inputClassName={inputClassName}
+            loading={loading}
             name={name.toString()}
             options={options}
             placeholder={placeholder ?? 'Ingrese un valor'}
+            query={query}
+            setQuery={setQuery}
             {...rest}
           />
         )}
@@ -57,4 +67,4 @@ const ComboBoxInput = <T extends FormSchemas>(
   );
 };
 
-export default ComboBoxInput;
+export default GMapsComboBox;

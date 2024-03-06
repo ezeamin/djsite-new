@@ -3,44 +3,32 @@ import { Fragment, useEffect, useState } from 'react';
 
 import type { FieldValues } from 'react-hook-form';
 import { MdCheck, MdClear, MdExpandMore } from 'react-icons/md';
+import { Suggestion } from 'react-places-autocomplete';
 
 import { cn } from '@/utilities';
 
-import type { ComboBoxProps } from './ComboBox.types';
-import { ListOption } from '@/interface';
+import type { GMCBProps } from './GMCB.types';
 
-/**
- * A custom combo box component that provides autocompletion functionality.
- *
- * @param props - The props for the ComboBox component.
- * @param className - Additional CSS class to apply to the component.
- * @param disabled - Specifies whether the combobox is disabled.
- * @param error - Specifies whether the combobox has an error.
- * @param msgError - Error message to display if no options are available.
- * @param options - Array of options for the combo box.
- * @param controller - React Hook Form controller (sends onChange fn).
- *
- * @returns JSX.Element A custom combo box element.
- */
-
-const ComboBox = <T extends FieldValues>(
-  props: ComboBoxProps<T>
-): JSX.Element => {
+const GMCB = <T extends FieldValues>(props: GMCBProps<T>): JSX.Element => {
   const {
     className,
     disabled = false,
     error = false,
     inputClassName,
+    loading,
     msgError,
     name,
     options,
     placeholder,
     controller,
+    query,
+    setQuery,
+    getInputProps,
+    getSuggestionItemProps,
   } = props;
 
   const [isOptionSelected, setIsOptionSelected] = useState(false); // Track if an option is selected
-  const [query, setQuery] = useState('');
-  const [selectedOption, setSelectedOption] = useState<ListOption | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const filteredOption =
     query === ''
@@ -49,17 +37,19 @@ const ComboBox = <T extends FieldValues>(
           description.toLowerCase().includes(query.toLowerCase())
         );
 
-  const positionedColor = 'bg-sky-600 text-white';
-
   const handleClearSelection = (): void => {
     setSelectedOption(null);
     setIsOptionSelected(false);
+    setQuery('');
     controller.onChange(null);
   };
 
-  const handleSelect = (selected: ListOption | null): void => {
+  const handleSelect = (selected: string | null): void => {
     setSelectedOption(selected);
     setIsOptionSelected(selected !== null);
+    if (selected) {
+      setQuery(selected);
+    }
     controller.onChange(selected);
   };
 
@@ -69,7 +59,7 @@ const ComboBox = <T extends FieldValues>(
         description.toLowerCase().includes(query.toLowerCase())
       );
       if (selected) {
-        handleSelect(selected);
+        handleSelect(selected.description);
       }
     }
   };
@@ -102,13 +92,14 @@ const ComboBox = <T extends FieldValues>(
                 `input input-bordered w-full bg-transparent pr-[45px] placeholder:!text-gray-400 focus:outline-none ${error ? 'border-error' : ''}`,
                 inputClassName
               )}
-              displayValue={(option: ListOption) => option?.description}
+              displayValue={(option: string) => option}
               id={name}
               placeholder={placeholder || 'Seleccione una opción...'}
               onBlur={checkQueryAndUpdate}
               onChange={(event) => {
                 setQuery(event.target.value);
               }}
+              {...getInputProps()}
             />
 
             {isOptionSelected ? (
@@ -142,47 +133,61 @@ const ComboBox = <T extends FieldValues>(
             <Combobox.Options
               className={`absolute z-40 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-500 dark:*:text-white sm:text-sm ${options.length === 0 ? 'hidden' : ''}`}
             >
-              {filteredOption.length === 0 && !query ? (
+              {loading && (
+                <div className="py-2 text-center">
+                  <span className="loading loading-spinner loading-sm" />
+                </div>
+              )}
+              {filteredOption.length === 0 && !loading ? (
                 <div
                   aria-atomic="true"
                   aria-live="assertive"
-                  className="relative cursor-default select-none px-4 py-2 text-gray-700"
+                  className="relative cursor-default select-none px-4 py-2 text-center text-gray-700"
                   id="error-message"
                 >
-                  {msgError || 'No hay opciones disponibles.'}
+                  {msgError || 'No hay opciones disponibles'}
                 </div>
               ) : (
                 filteredOption.map((option) => (
                   <Combobox.Option
                     aria-label="Opciones disponibles"
-                    className={({ active, selected }) =>
+                    className={({ active }) =>
                       `relative cursor-pointer select-none py-3 pl-10 pr-4 ${
-                        active ? `${positionedColor}` : 'text-gray-900'
+                        active ? 'bg-sky-600 text-white' : 'text-gray-900'
                       }`
                     }
-                    key={option.id}
-                    value={option}
+                    key={option.description}
+                    value={option.description}
                   >
-                    {({ selected, active }) => (
-                      <>
-                        <span
-                          className={`block truncate ${
-                            selected ? 'font-medium' : 'font-normal'
-                          }`}
-                        >
-                          {option.description}
-                        </span>
-                        {selected && (
+                    {({ selected, active }) => {
+                      const optProps = getSuggestionItemProps(
+                        option as Suggestion
+                      );
+                      const { key, ...rest } = optProps;
+
+                      return (
+                        <>
                           <span
-                            className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                              active ? 'text-rose-500' : 'text-teal-600'
+                            className={`block truncate ${
+                              selected ? 'font-medium' : 'font-normal'
                             }`}
+                            {...rest}
+                            key={key as string}
                           >
-                            <MdCheck className="h-5 w-5" />
+                            {option.description}
                           </span>
-                        )}
-                      </>
-                    )}
+                          {selected && (
+                            <span
+                              className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                active ? 'text-rose-500' : 'text-teal-600'
+                              }`}
+                            >
+                              <MdCheck className="h-5 w-5" />
+                            </span>
+                          )}
+                        </>
+                      );
+                    }}
                   </Combobox.Option>
                 ))
               )}
@@ -194,4 +199,4 @@ const ComboBox = <T extends FieldValues>(
   );
 };
 
-export default ComboBox;
+export default GMCB;

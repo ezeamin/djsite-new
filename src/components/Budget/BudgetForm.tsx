@@ -8,19 +8,22 @@ import TimeForm from './TimeForm';
 
 import { useZodForm } from '@/hooks';
 
-import { budgetFormSchema } from '@/forms/schemas/budgetFormSchema';
+import {
+  BudgetFormSchema,
+  budgetFormSchema,
+} from '@/forms/schemas/budgetFormSchema';
 
 import { koulen } from '@/styles/fonts';
 
 const BudgetForm = () => {
-  const { control, onSubmitMiddleware, areAllFieldsFilled } =
+  const { control, onSubmitMiddleware, areAllFieldsFilled, setValue } =
     useZodForm(budgetFormSchema);
 
   // ---------------------------------------
   // HANDLERS
   // ---------------------------------------
 
-  const handleSubmit = (data: unknown) => {
+  const handleSubmit = (data: BudgetFormSchema) => {
     console.log('handleSubmit', data);
   };
 
@@ -40,7 +43,7 @@ const BudgetForm = () => {
         placeholder="dd/mm/aaaa"
       />
       <TimeForm control={control} />
-      <LocationForm control={control} />
+      <LocationForm control={control} name="location" setValue={setValue} />
       <HoursForm control={control} />
       <ServiceForm control={control} />
       <button

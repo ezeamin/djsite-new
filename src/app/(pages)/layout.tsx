@@ -1,15 +1,10 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { ReactNode } from 'react';
-
-import { FaHome } from 'react-icons/fa';
-
-import { PATHS } from '@/constants/paths';
 
 const layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      <header className="mb-3 mt-5 flex items-center justify-between">
+      <header className="mb-3 mt-5">
         <Image
           priority
           alt="logo dj eze amin"
@@ -17,9 +12,6 @@ const layout = ({ children }: { children: ReactNode }) => {
           src="/img/icon.ico"
           width={50}
         />
-        <Link className="three-d-button btn text-xl" href={PATHS.HOME}>
-          <FaHome />
-        </Link>
       </header>
       <section>{children}</section>
     </>
