@@ -24,8 +24,8 @@ const LocationForm = <T extends FormSchemas>(props: LocationFormProps<T>) => {
       setValue(name as string, data[0].formatted_address);
       setQuery(data[0].formatted_address);
     } catch (error) {
-      toast.error(
-        'La dirección ingresada no es válida. Por favor, revisá este campo'
+      toast.warning(
+        'La dirección ingresada no es válida. Por favor, revisá este campo 😀🔫'
       );
     }
   };

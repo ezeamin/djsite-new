@@ -1,12 +1,18 @@
 'use client';
 
+import { useState } from 'react';
+
+import LoadingBackdrop from '../Loading/LoadingBackdrop';
 import DateInput from '../ui/DateInput/DateInput';
 import HoursForm from './HoursForm';
 import LocationForm from './LocationForm';
 import ServiceForm from './ServiceForm';
 import TimeForm from './TimeForm';
+import { createPortal } from 'react-dom';
 
 import { useZodForm } from '@/hooks';
+
+import { manageBudgetResponse } from '@/utilities';
 
 import {
   BudgetFormSchema,
@@ -19,12 +25,27 @@ const BudgetForm = () => {
   const { control, onSubmitMiddleware, areAllFieldsFilled, setValue } =
     useZodForm(budgetFormSchema);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   // ---------------------------------------
   // HANDLERS
   // ---------------------------------------
 
-  const handleSubmit = (data: BudgetFormSchema) => {
-    console.log('handleSubmit', data);
+  const handleSubmit = async (formData: BudgetFormSchema) => {
+    setIsLoading(true);
+
+    const res = await fetch('/api/budget', {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await res.json();
+
+    setIsLoading(false);
+
+    manageBudgetResponse(formData, res, data);
   };
 
   // ---------------------------------------
@@ -36,6 +57,7 @@ const BudgetForm = () => {
       className="flex flex-col gap-2"
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
+      {isLoading && createPortal(<LoadingBackdrop open />, document.body)}
       <DateInput
         control={control}
         label="Fecha"

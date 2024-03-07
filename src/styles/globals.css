@@ -216,3 +216,9 @@ textarea {
   position: absolute;
   bottom: 0;
 }
+
+.form__swal__link {
+  color: #fc8e8e;
+  text-decoration: underline;
+  font-weight: bold;
+}
