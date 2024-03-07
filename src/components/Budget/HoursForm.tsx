@@ -5,7 +5,7 @@ import { FormSchemas } from '@/forms';
 import { HoursFormProps } from '../interface/budget';
 
 const HoursForm = <T extends FormSchemas>(props: HoursFormProps<T>) => {
-  const { control } = props;
+  const { control, name } = props;
 
   return (
     <fieldset>
@@ -14,11 +14,11 @@ const HoursForm = <T extends FormSchemas>(props: HoursFormProps<T>) => {
         Tiempo (horas)
       </label>
       <section className="mt-1 flex justify-between gap-1 sm:gap-2">
-        <RadioButtonInput control={control} label="Menos" name="hours" />
-        <RadioButtonInput control={control} label="4" name="hours" />
-        <RadioButtonInput control={control} label="5" name="hours" />
-        <RadioButtonInput control={control} label="6" name="hours" />
-        <RadioButtonInput control={control} label="Mas" name="hours" />
+        <RadioButtonInput control={control} label="Menos" name={name} />
+        <RadioButtonInput control={control} label="4" name={name} />
+        <RadioButtonInput control={control} label="5" name={name} />
+        <RadioButtonInput control={control} label="6" name={name} />
+        <RadioButtonInput control={control} label="Mas" name={name} />
       </section>
     </fieldset>
   );

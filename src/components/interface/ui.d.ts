@@ -1,5 +1,6 @@
-import type { FormSchemas } from '@/form-schemas';
 import type { Control, UseFormSetValue } from 'react-hook-form';
+
+import type { FormSchemas } from '@/forms';
 
 export type FormHandling<T extends FormSchemas, TisFile extends boolean> = {
   control: Control<T>;

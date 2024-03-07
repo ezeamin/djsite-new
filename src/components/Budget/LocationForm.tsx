@@ -50,7 +50,7 @@ const LocationForm = <T extends FormSchemas>(props: LocationFormProps<T>) => {
             getSuggestionItemProps={getSuggestionItemProps}
             label="Ubicación (exacta)"
             loading={loading}
-            name="location"
+            name={name}
             options={suggestions.map((s) => ({
               id: s.id,
               description: s.description,

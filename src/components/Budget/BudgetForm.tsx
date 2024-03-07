@@ -64,10 +64,10 @@ const BudgetForm = () => {
         name="date"
         placeholder="dd/mm/aaaa"
       />
-      <TimeForm control={control} />
+      <TimeForm<BudgetFormSchema> control={control} name="time" />
       <LocationForm control={control} name="location" setValue={setValue} />
-      <HoursForm control={control} />
-      <ServiceForm control={control} />
+      <HoursForm<BudgetFormSchema> control={control} name="hours" />
+      <ServiceForm<BudgetFormSchema> control={control} name="service" />
       <button
         className={`${areAllFieldsFilled ? 'three-d-button--selected' : 'bg-gray-300'} btn mt-2 border-0 text-xl transition-colors ${koulen.className}`}
         disabled={!areAllFieldsFilled}
