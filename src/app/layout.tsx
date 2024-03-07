@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 
 import { Toaster } from 'sonner';
 
+import BackButton from '@/components/Common/BackButton';
 import Balls from '@/components/Common/Balls';
 import Glass from '@/components/Common/Glass';
 
@@ -37,7 +38,9 @@ export default function RootLayout({
       <body className={barlow.className}>
         <Glass>{children}</Glass>
         <Balls />
+
         <Toaster richColors position="top-center" />
+        <BackButton />
 
         <Analytics />
         <SpeedInsights />
