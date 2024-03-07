@@ -45,7 +45,7 @@ export const calculateDistance = async (location: string): Promise<number> => {
     },
   });
   const data = await body.json();
-  // console.log(data);
+  console.log(data);
 
   try {
     let result = data.rows[0].elements[0].distance.text.split(' ')[0];
