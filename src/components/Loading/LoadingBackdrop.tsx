@@ -31,7 +31,7 @@ const LoadingBackdrop = (props: LoadingBackdropProps): JSX.Element => {
     <div
       className={`h-screen w-screen ${
         open ? 'block' : 'hidden'
-      } items-center"} fixed left-0 top-0 z-50 flex justify-center bg-black bg-opacity-60`}
+      } items-center"} fixed left-0 top-0 z-[999999999999] flex justify-center bg-black bg-opacity-60`}
     >
       <div className="flex flex-col items-center justify-center">
         <Spinner />

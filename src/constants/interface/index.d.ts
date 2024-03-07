@@ -1,4 +1,4 @@
-export interface Route {
+export interface HomeOption {
   id: number;
   name: string;
   path: string;

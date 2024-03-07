@@ -1,6 +1,6 @@
 import {
   calculateDistance,
-  getSheetsData,
+  getPriceFromDB,
   sendPingMail,
   validateBudgetBody,
 } from '@/utilities';
@@ -41,7 +41,7 @@ export const POST = async (request: Request): Promise<Response> => {
     );
   }
 
-  const price = await getSheetsData(body, distance);
+  const price = await getPriceFromDB(body, distance);
 
   if (price === 0) {
     return Response.json(

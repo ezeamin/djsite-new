@@ -1,3 +1,4 @@
+import { AuthFormSchema } from './schemas/authFormSchema';
 import { BudgetFormSchema } from './schemas/budgetFormSchema';
 
 /**
@@ -12,4 +13,4 @@ import { BudgetFormSchema } from './schemas/budgetFormSchema';
  */
 
 // Use | to join all validation schemas types.
-export type FormSchemas = BudgetFormSchema;
+export type FormSchemas = BudgetFormSchema | AuthFormSchema;

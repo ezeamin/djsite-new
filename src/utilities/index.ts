@@ -1,5 +1,6 @@
 import { cn } from './cn';
 import { customSwal } from './customSwal';
+import { getEvents } from './db';
 import { fetchFn } from './fetchFn';
 import { getPriceFromDB } from './gsheets';
 import { sendPingMail } from './mailing';
@@ -15,7 +16,8 @@ export {
   cn,
   customSwal,
   fetchFn,
-  getPriceFromDB as getSheetsData,
+  getEvents,
+  getPriceFromDB,
   manageBudgetResponse,
   removeLineBreaks,
   sendPingMail,

@@ -2,9 +2,9 @@ import { PATHS } from './paths';
 import { FaDollarSign, FaInstagram, FaMusic, FaWhatsapp } from 'react-icons/fa';
 import { FaCalendarDays } from 'react-icons/fa6';
 
-import { Route } from './interface';
+import { HomeOption } from './interface';
 
-export const ROUTES: Record<string, Route> = {
+export const HOME_OPTIONS: Record<string, HomeOption> = {
   BUDGET: {
     id: 1000,
     name: 'Presupuestar',

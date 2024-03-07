@@ -1,8 +1,10 @@
 import Title from '@/components/Common/Title';
 
-const NextEventsPage = () => {
+import { getEvents } from '@/utilities';
+
+const NextEventsPage = async () => {
   // fetch events
-  const events = [];
+  const events = await getEvents({ finished: true });
 
   return (
     <>

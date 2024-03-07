@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-import BackButton from '@/components/Common/BackButton';
 import Balls from '@/components/Common/Balls';
 import Glass from '@/components/Common/Glass';
+import LinkToAdmin from '@/components/Home/LinkToAdmin';
 
 export default function RootLayout({
   children,
@@ -13,6 +13,7 @@ export default function RootLayout({
     <>
       <Glass>{children}</Glass>
       <Balls />
+      <LinkToAdmin />
     </>
   );
 }

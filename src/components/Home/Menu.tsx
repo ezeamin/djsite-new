@@ -1,8 +1,8 @@
 import Option from './Option';
 
-import { ROUTES } from '@/constants/routes';
+import { HOME_OPTIONS } from '@/constants/homeOptions';
 
-const options = Object.values(ROUTES);
+const options = Object.values(HOME_OPTIONS);
 
 const Menu = () => {
   return (

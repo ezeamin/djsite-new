@@ -292,7 +292,7 @@ export const manageBudgetResponse = async (
   data: { data: { price: number; distance: number } | null; message: string }
 ) => {
   if (!res.ok) {
-    toast.warning(data.message);
+    toast.warning(data.message || 'Ocurrió un error desconocido. Perdon! 😔');
     return;
   }
 

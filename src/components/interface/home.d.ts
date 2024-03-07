@@ -1,5 +1,5 @@
-import { Route } from '@/constants/interface';
+import { HomeOption } from '@/constants/interface';
 
 export interface OptionProps {
-  option: Route;
+  option: HomeOption;
 }
