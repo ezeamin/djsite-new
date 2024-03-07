@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
     rejectUnauthorized: false,
     ciphers: 'SSLv3',
   },
-  secure: false,
+  secure: true,
   auth: {
     user: MAIL_USER,
     pass: MAIL_PASS,
