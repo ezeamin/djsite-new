@@ -43,7 +43,7 @@ const AuthForm = () => {
       toast.success('Bienvenido! 😎');
       window.setTimeout(() => {
         router.push('/admin/events');
-      }, 5000);
+      }, 1000);
     }
   };
 
@@ -56,9 +56,10 @@ const AuthForm = () => {
           control={control}
           label="Clave"
           name="password"
+          type="password"
         />
         <button
-          className={`${areAllFieldsFilled ? 'three-d-button--selected' : 'bg-gray-300'} btn mt-2 w-full text-lg`}
+          className={`${areAllFieldsFilled ? 'three-d-button--red' : 'bg-gray-300'} btn mt-2 w-full text-lg`}
           disabled={!areAllFieldsFilled}
           type="submit"
         >

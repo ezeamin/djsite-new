@@ -17,13 +17,38 @@ export interface Event {
   id: string;
   title: string;
   date: Date;
-  time: string;
+  time: 'Dia' | 'Noche' | string;
   startTime: string;
   endTime: string;
   location: string;
+  service: 'Basico' | 'Parlantes' | string;
   price: number;
   paid: number;
   observations: string;
-  finished: boolean;
   id_client: string;
+  client: {
+    name: string;
+    phone: string;
+  };
 }
+
+export interface Compromise {
+  id: string;
+  reason: string;
+  date: Event['date'];
+  time: Event['time'];
+}
+
+export type MinimalEvent = {
+  id: string;
+  date: Event['date'];
+  time: Event['time'];
+} & (
+  | {
+      type: 'event';
+      title: string;
+    }
+  | {
+      type: 'compromise';
+    }
+);

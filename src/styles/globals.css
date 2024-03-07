@@ -180,14 +180,26 @@ textarea {
   border: 0;
 }
 
-.three-d-button--selected {
+.three-d-button--red {
   background: linear-gradient(0deg, #995959 0%, #fc8e8e 100%) !important;
   color: #ffffff !important;
   border: 0;
 }
 
-.three-d-button--submit {
-  background: linear-gradient(0deg, #995959 0%, #fc8e8e 100%) !important;
+.three-d-button--gray {
+  background: linear-gradient(0deg, #797979 0%, #bdbdbd 100%) !important;
+  color: #ffffff !important;
+  border: 0;
+}
+
+.three-d-button--green {
+  background: linear-gradient(0deg, #318538 0%, #46c44c 100%) !important;
+  color: #ffffff !important;
+  border: 0;
+}
+
+.three-d-button--primary {
+  background: linear-gradient(0deg, #2d577c 0%, #4d74cf 100%) !important;
   color: #ffffff !important;
   border: 0;
 }

@@ -5,6 +5,8 @@ import UAParser from 'ua-parser-js';
 
 import { BudgetFormSchema } from '@/forms/schemas/budgetFormSchema';
 
+import { Compromise, Event, MinimalEvent } from '@/interface';
+
 /**
  * Usage with template literals. To call the function, do not use parentheses.
  * @param strings
@@ -66,6 +68,12 @@ export const buildLocationMap = (location: string): string => {
   const encodedLoc = location.replaceAll(' ', '+');
 
   return `https://www.google.com/maps/place/${encodedLoc}`;
+};
+
+export const buildNavigationLink = (location: string): string => {
+  const encodedLoc = location.replaceAll(' ', '+');
+
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodedLoc}`;
 };
 
 export const generateEventData = ({
@@ -326,10 +334,47 @@ export const manageBudgetResponse = async (
     confirmButtonText: 'Sip, ir a WhatsApp! 📲',
     cancelButtonText: 'No gracias, soy aburrido 😔',
     confirmButtonColor: '#395aa8',
-    footer: `<p class="text-center -my-2">Es importante leer los&nbsp;<a href="/terms-and-conditions" target="_blank" class="mb-0 form__swal__link">terminos y condiciones</a> (porfa)</p>`,
+    footer: `<p class="text-center -my-2">Es importante leer los&nbsp;<a href="/terms-and-conditions" target="_blank" class="mb-0 form__swal__link">términos y condiciones</a> (porfa)</p>`,
   });
 
   if (action.isConfirmed) {
     sendWhatsappMessage(formData, price!, distance);
   }
+};
+
+export const sortEvents = (
+  a: Event | Compromise | MinimalEvent,
+  b: Event | Compromise | MinimalEvent
+) => {
+  // sort by date and by time ("Dia" should come before "Noche")
+  const dateDiff = a.date.getTime() - b.date.getTime();
+
+  if (dateDiff === 0) {
+    if (a.time === b.time) return 0;
+    if (a.time === 'Dia') return -1;
+    return 1;
+  }
+
+  return dateDiff;
+};
+
+export const getAmountOfHours = ({
+  date,
+  start,
+  end,
+}: {
+  date: Date;
+  start: string;
+  end: string;
+}) => {
+  const day = dayjs(date).format('YYYY-MM-DD');
+  const isNextDay = end < start;
+  const nextDay = dayjs(date).add(1, 'day').format('YYYY-MM-DD');
+
+  const startTime = dayjs(`${day}T${start}`);
+  const endTime = dayjs(`${isNextDay ? nextDay : day}T${end}`);
+
+  const diff = endTime.diff(startTime, 'hour');
+
+  return diff;
 };

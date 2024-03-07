@@ -8,5 +8,10 @@ export const PATHS = {
   ADMIN: {
     AUTH: '/admin/auth',
     EVENTS: '/admin/events',
+    HISTORY: '/admin/history',
+    CREATE: {
+      EVENT: '/admin/events/create',
+      COMPROMISE: '/admin/compromise/create',
+    },
   },
 };

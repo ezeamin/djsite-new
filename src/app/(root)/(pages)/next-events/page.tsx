@@ -4,7 +4,7 @@ import { getEvents } from '@/utilities';
 
 const NextEventsPage = async () => {
   // fetch events
-  const events = await getEvents({ finished: true });
+  const events = await getEvents({ finished: true, fullData: false });
 
   return (
     <>

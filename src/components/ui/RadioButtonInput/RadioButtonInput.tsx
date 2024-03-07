@@ -26,7 +26,7 @@ const RadioButtonInput = <T extends FormSchemas>(
           <input hidden id={label} ref={ref} type="radio" value={label} />
           <button
             className={cn(
-              `${koulen.className} three-d-button btn w-full text-xl text-gray-800 ${value === label ? 'three-d-button--selected' : ''} ${error ? 'border-error' : ''} `,
+              `${koulen.className} three-d-button btn w-full text-xl text-gray-800 ${value === label ? 'three-d-button--red' : ''} ${error ? 'border-error' : ''} `,
               className
             )}
             type="button"

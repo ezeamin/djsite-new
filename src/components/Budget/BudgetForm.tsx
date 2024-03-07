@@ -69,7 +69,7 @@ const BudgetForm = () => {
       <HoursForm<BudgetFormSchema> control={control} name="hours" />
       <ServiceForm<BudgetFormSchema> control={control} name="service" />
       <button
-        className={`${areAllFieldsFilled ? 'three-d-button--selected' : 'bg-gray-300'} btn mt-2 border-0 text-xl transition-colors ${koulen.className}`}
+        className={`${areAllFieldsFilled ? 'three-d-button--red' : 'bg-gray-300'} btn mt-2 border-0 text-xl transition-colors ${koulen.className}`}
         disabled={!areAllFieldsFilled}
         type="submit"
       >
