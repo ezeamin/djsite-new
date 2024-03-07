@@ -20,11 +20,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-transporter.verify((err) => {
-  if (err) console.error('Email config is NOT correct 🥺', err);
-  console.log('Email config is correct! 🥳😎');
-});
-
 export const sendPingMail = async ({
   formData,
   price,
@@ -47,8 +42,8 @@ export const sendPingMail = async ({
 
   try {
     await transporter.sendMail(mailContent);
-    console.log('Mail sent! 🥳😎');
+    console.log('NEW BUDGET --- Mail sent! 🥳😎');
   } catch (error) {
-    console.error('\nError sending mail 🥺', error, `\n`);
+    console.error('\nNEW BUDGET --- Error sending mail 🥺', error, `\n`);
   }
 };
