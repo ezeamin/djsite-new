@@ -326,7 +326,7 @@ export const manageBudgetResponse = async (
     confirmButtonText: 'Sip, ir a WhatsApp! 📲',
     cancelButtonText: 'No gracias, soy aburrido 😔',
     confirmButtonColor: '#395aa8',
-    footer: `<p class="text-center -my-2">Es importante leer los&nbsp;<a href="https://bit.ly/tyc-djezeamin-1" target="_blank" class="mb-0 form__swal__link">terminos y condiciones</a> (porfa)</p>`,
+    footer: `<p class="text-center -my-2">Es importante leer los&nbsp;<a href="/terms-and-conditions" target="_blank" class="mb-0 form__swal__link">terminos y condiciones</a> (porfa)</p>`,
   });
 
   if (action.isConfirmed) {

@@ -43,7 +43,7 @@ const LoadingBackdrop = (props: LoadingBackdropProps): JSX.Element => {
             opacity: showMessage ? 1 : 0,
           }}
         >
-          Por favor espere...
+          Bancame porfa! 😅
         </p>
       </div>
     </div>
