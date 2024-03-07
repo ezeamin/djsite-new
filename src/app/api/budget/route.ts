@@ -1,5 +1,6 @@
 import {
   calculateDistance,
+  getSheetsData,
   sendPingMail,
   validateBudgetBody,
 } from '@/utilities';
@@ -40,11 +41,24 @@ export const POST = async (request: Request): Promise<Response> => {
     );
   }
 
+  const price = await getSheetsData(body, distance);
+
+  if (price === 0) {
+    return Response.json(
+      {
+        data: null,
+        message:
+          'Ups! No pude calcular el presupuesto (algo se rompió), perdon! 🥺',
+      },
+      { status: 500 }
+    );
+  }
+
   // Get IP
   const ip =
     request.headers.get('x-real-ip') || request.headers.get('x-forwarded-for');
   const userAgent = request.headers.get('user-agent');
-  sendPingMail({ formData: body, price: 8000, distance, ip, userAgent });
+  sendPingMail({ formData: body, price, distance, ip, userAgent });
 
-  return Response.json({ data: { price: 8000, distance }, message: null });
+  return Response.json({ data: { price, distance }, message: null });
 };

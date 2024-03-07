@@ -47,6 +47,7 @@ export const sendPingMail = async ({
 
   try {
     await transporter.sendMail(mailContent);
+    console.log('Mail sent! 🥳😎');
   } catch (error) {
     console.error('\nError sending mail 🥺', error, `\n`);
   }

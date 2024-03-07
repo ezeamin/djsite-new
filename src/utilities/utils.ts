@@ -106,7 +106,7 @@ export const generateEventMailData = ({
   const formattedIp = ip || 'N/A';
 
   const parser = new UAParser(userAgent || '');
-  const device = parser.getDevice().type || 'N/A';
+  const device = parser.getDevice();
   const browser = parser.getBrowser().name || 'N/A';
   const os = parser.getOS().name || 'N/A';
 
@@ -239,7 +239,9 @@ export const generateEventMailData = ({
         >
           Dispositivo
         </td>
-        <td style="border: 1px solid #ccc; padding: 0.5rem">${device}</td>
+        <td style="border: 1px solid #ccc; padding: 0.5rem">
+          ${device.vendor ? `${device.vendor || ''} ${device.model || ''} (${device.type || ''})` : 'N/A'}
+        </td>
       </tr>
     </tbody>
   </table>
@@ -275,7 +277,10 @@ const sendWhatsappMessage = async (
   ${generateEventData({ formData, price, distance })}`;
 
   const encodedText = encodeURI(text);
-  const encodedLink = buildLocationMap(formData.location);
+  const encodedLink = buildLocationMap(formData.location).replaceAll(
+    '+',
+    '%2B'
+  );
 
   const url = `https://wa.me/+5493815038570?text=${encodedText + encodedLink}`;
   window.open(url, '_blank')?.focus();

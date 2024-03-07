@@ -1,6 +1,7 @@
 import { cn } from './cn';
 import { customSwal } from './customSwal';
 import { fetchFn } from './fetchFn';
+import { getPriceFromDB } from './gsheets';
 import { sendPingMail } from './mailing';
 import {
   calculateDistance,
@@ -14,6 +15,7 @@ export {
   cn,
   customSwal,
   fetchFn,
+  getPriceFromDB as getSheetsData,
   manageBudgetResponse,
   removeLineBreaks,
   sendPingMail,
