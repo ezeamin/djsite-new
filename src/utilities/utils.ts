@@ -36,7 +36,8 @@ export const calculateDistance = async (location: string): Promise<number> => {
   const originEncoded = encodeURI(origin);
   const destination = encodeURI(location);
 
-  const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+  const API_KEY = process.env.GOOGLE_MATRIX_API_KEY;
+  console.log("🚀 ~ calculateDistance ~ API_KEY:", API_KEY)
   const url = `https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${destination}&origins=${originEncoded}&key=${API_KEY}`;
 
   const body = await fetch(url, {
