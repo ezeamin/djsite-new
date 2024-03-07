@@ -13,7 +13,7 @@ const HoursForm = <T extends FormSchemas>(props: HoursFormProps<T>) => {
       <label className="text-lg" htmlFor="hours">
         Tiempo (horas)
       </label>
-      <section className="mt-1 flex justify-between gap-2">
+      <section className="mt-1 flex justify-between gap-1">
         <RadioButtonInput control={control} label="Menos" name="hours" />
         <RadioButtonInput control={control} label="4" name="hours" />
         <RadioButtonInput control={control} label="5" name="hours" />

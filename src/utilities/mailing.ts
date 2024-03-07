@@ -9,10 +9,11 @@ const { MAIL_USER, MAIL_PASS, MAIL_HOST } = process.env;
 
 const transporter = nodemailer.createTransport({
   host: MAIL_HOST,
-  tls: {
-    rejectUnauthorized: false,
-    ciphers: 'SSLv3',
-  },
+  //   tls: {
+  //     rejectUnauthorized: false,
+  //     ciphers: 'SSLv3',
+  //   },
+  port: 465,
   secure: true,
   auth: {
     user: MAIL_USER,
