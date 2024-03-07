@@ -1,4 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import { ReactNode } from 'react';
 
@@ -37,7 +38,9 @@ export default function RootLayout({
         <Glass>{children}</Glass>
         <Balls />
         <Toaster richColors position="top-center" />
+
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

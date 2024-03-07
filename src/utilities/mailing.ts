@@ -11,11 +11,18 @@ const transporter = nodemailer.createTransport({
   host: MAIL_HOST,
   tls: {
     rejectUnauthorized: false,
+    ciphers: 'SSLv3',
   },
+  secure: false,
   auth: {
     user: MAIL_USER,
     pass: MAIL_PASS,
   },
+});
+
+transporter.verify((err) => {
+  if (err) console.error('Email config is NOT correct 🥺', err);
+  console.log('Email config is correct! 🥳😎');
 });
 
 export const sendPingMail = async ({
