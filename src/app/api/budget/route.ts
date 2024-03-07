@@ -58,7 +58,7 @@ export const POST = async (request: Request): Promise<Response> => {
   const ip =
     request.headers.get('x-real-ip') || request.headers.get('x-forwarded-for');
   const userAgent = request.headers.get('user-agent');
-  sendPingMail({ formData: body, price, distance, ip, userAgent });
+  await sendPingMail({ formData: body, price, distance, ip, userAgent }); // TODO: Remove
 
   return Response.json({ data: { price, distance }, message: null });
 };
