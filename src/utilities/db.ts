@@ -56,6 +56,7 @@ export const getEvents = async ({
         date: compromise.date,
         time: compromise.time as 'Dia' | 'Noche',
         type: 'compromise',
+        title: null as never,
       })
     );
 
