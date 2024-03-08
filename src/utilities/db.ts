@@ -159,10 +159,18 @@ export const getEvents = async ({
   finished: boolean;
   fullData: boolean;
 }): Promise<(Event | Compromise | MinimalEvent)[]> => {
+  const dateFilter = finished
+    ? {
+        lt: `${new Date().toISOString().split('T')[0]}T00:00:00.000Z`,
+      }
+    : {
+        gte: `${new Date().toISOString().split('T')[0]}T00:00:00.000Z`,
+      };
+
   const eventsPromise = prisma.event.findMany({
     where: {
       date: {
-        ...(finished ? { lt: new Date() } : { gte: new Date() }),
+        ...dateFilter,
       },
     },
     include: {
@@ -178,7 +186,7 @@ export const getEvents = async ({
   const compromisesPromise = prisma.compromise.findMany({
     where: {
       date: {
-        ...(finished ? { lt: new Date() } : { gte: new Date() }),
+        ...dateFilter,
       },
     },
   });

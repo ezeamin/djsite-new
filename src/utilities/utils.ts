@@ -118,7 +118,11 @@ export const generateEventMailData = ({
   const formattedPrice = formatPrice(price);
   const formattedIp = ip || 'N/A';
 
-  const weekDay = dayjs(formData.date).locale('es').format('dddd');
+  const weekDay = new Date(formData.date)
+    .toLocaleDateString('es-AR', {
+      weekday: 'short',
+    })
+    .replace(/^\w/, (c) => c.toUpperCase());
 
   const parser = new UAParser(userAgent || '');
   const device = parser.getDevice();
