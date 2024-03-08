@@ -5,8 +5,6 @@ import { getEvents } from '@/utilities';
 
 import { Compromise, Event } from '@/interface';
 
-export const revalidate = 3600; // 1 hour
-
 const EventList = async () => {
   const events = (await getEvents({
     finished: false,

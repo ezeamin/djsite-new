@@ -3,8 +3,6 @@ import Image from 'next/image';
 import Title from '@/components/Common/Title';
 import Menu from '@/components/Home/Menu';
 
-import { koulen } from '@/styles/fonts';
-
 const HomePage = () => {
   return (
     <>

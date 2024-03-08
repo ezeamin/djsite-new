@@ -3,11 +3,10 @@
 import { useState } from 'react';
 
 import LoadingBackdrop from '../Loading/LoadingBackdrop';
-import DateInput from '../ui/DateInput/DateInput';
+import DateAndTimeForm from './DateAndTimeForm';
 import HoursForm from './HoursForm';
 import LocationForm from './LocationForm';
 import ServiceForm from './ServiceForm';
-import TimeForm from './TimeForm';
 import { createPortal } from 'react-dom';
 
 import { useZodForm } from '@/hooks';
@@ -21,8 +20,12 @@ import {
 
 import { koulen } from '@/styles/fonts';
 
-const BudgetForm = () => {
-  const { control, onSubmitMiddleware, areAllFieldsFilled, setValue } =
+import { BudgetFormProps } from '../interface/budget';
+
+const BudgetForm = (props: BudgetFormProps) => {
+  const { busyDates } = props;
+
+  const { control, onSubmitMiddleware, areAllFieldsFilled, setValue, watch } =
     useZodForm(budgetFormSchema);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -58,13 +61,11 @@ const BudgetForm = () => {
       onSubmit={onSubmitMiddleware(handleSubmit)}
     >
       {isLoading && createPortal(<LoadingBackdrop open />, document.body)}
-      <DateInput
+      <DateAndTimeForm<BudgetFormSchema>
+        busyDates={busyDates}
         control={control}
-        label="Fecha"
-        name="date"
-        placeholder="dd/mm/aaaa"
+        watch={watch}
       />
-      <TimeForm<BudgetFormSchema> control={control} name="time" />
       <LocationForm control={control} name="location" setValue={setValue} />
       <HoursForm<BudgetFormSchema> control={control} name="hours" />
       <ServiceForm<BudgetFormSchema> control={control} name="service" />

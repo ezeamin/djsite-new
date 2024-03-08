@@ -1,14 +1,16 @@
 import BudgetForm from '@/components/Budget/BudgetForm';
 import Title from '@/components/Common/Title';
 
-const BudgetPage = () => {
-  // fetch available dates
+import { getBusyDates } from '@/utilities';
+
+const BudgetPage = async () => {
   // fetch message (alert)
+  const busyDates = await getBusyDates();
 
   return (
     <>
       <Title title="Presupuestar" />
-      <BudgetForm />
+      <BudgetForm busyDates={busyDates} />
     </>
   );
 };

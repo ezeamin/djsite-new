@@ -1,9 +1,45 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import { prisma } from './prisma';
 import { sortEvents } from './utils';
 
 import { Compromise, Event, MinimalEvent } from '@/interface';
+
+// COMMON -------------------------------------
+
+export const getBusyDates = async () => {
+  const events = await prisma.event.findMany({
+    where: {
+      date: {
+        gte: new Date(),
+      },
+    },
+    select: {
+      date: true,
+      time: true,
+    },
+  });
+
+  const compromises = await prisma.compromise.findMany({
+    where: {
+      date: {
+        gte: new Date(),
+      },
+    },
+    select: {
+      date: true,
+      time: true,
+    },
+  });
+
+  const data = [...events, ...compromises];
+
+  return data;
+};
+
+// EVENTS -------------------------------------
 
 export const getEvents = async ({
   finished,
@@ -101,7 +137,12 @@ export const postEvent = async (event: /* CreateEventSchema */ any) => {
       },
     },
   });
+
+  revalidatePath('/next-events');
+  revalidatePath('/admin/events');
 };
+
+// COMPROMISE -----------------------------------
 
 export const postCompromise = async (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -120,6 +161,9 @@ export const postCompromise = async (
       time: compromise.time,
     },
   });
+
+  revalidatePath('/next-events');
+  revalidatePath('/admin/events');
 };
 
 export const deleteCompromise = async (id: string) => {
@@ -128,4 +172,7 @@ export const deleteCompromise = async (id: string) => {
       id,
     },
   });
+
+  revalidatePath('/next-events');
+  revalidatePath('/admin/events');
 };

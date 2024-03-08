@@ -1,6 +1,12 @@
 import { cn } from './cn';
 import { customSwal } from './customSwal';
-import { deleteCompromise, getEvents, postCompromise, postEvent } from './db';
+import {
+  deleteCompromise,
+  getBusyDates,
+  getEvents,
+  postCompromise,
+  postEvent,
+} from './db';
 import { fetchFn } from './fetchFn';
 import { getPriceFromDB } from './gsheets';
 import { sendPingMail } from './mailing';
@@ -22,6 +28,7 @@ export {
   deleteCompromise,
   fetchFn,
   getAmountOfHours,
+  getBusyDates,
   getEmoji,
   getEvents,
   getPriceFromDB,
