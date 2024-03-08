@@ -39,6 +39,49 @@ export const getBusyDates = async () => {
   return data;
 };
 
+export const getMessage = async () => {
+  const messages = await prisma.message.findMany({
+    select: {
+      message: true,
+    },
+  });
+
+  if (messages.length === 0) {
+    return '';
+  }
+
+  return messages[0].message;
+};
+
+export const changeMessage = async (message: string) => {
+  const messages = await prisma.message.findMany({
+    select: {
+      id: true,
+      message: true,
+    },
+  });
+
+  if (messages.length === 0) {
+    await prisma.message.create({
+      data: {
+        message,
+      },
+    });
+  } else {
+    await prisma.message.update({
+      where: {
+        id: messages[0].id,
+      },
+      data: {
+        message,
+      },
+    });
+  }
+
+  revalidatePath('/admin/events');
+  revalidatePath('/budget');
+};
+
 // EVENTS -------------------------------------
 
 export const getEvents = async ({

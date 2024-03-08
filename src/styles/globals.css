@@ -235,3 +235,7 @@ textarea {
   text-decoration: underline;
   font-weight: bold;
 }
+
+.swal2-container {
+  z-index: 9999999;
+}

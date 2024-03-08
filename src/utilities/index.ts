@@ -1,9 +1,11 @@
 import { cn } from './cn';
 import { customSwal } from './customSwal';
 import {
+  changeMessage,
   deleteCompromise,
   getBusyDates,
   getEvents,
+  getMessage,
   postCompromise,
   postEvent,
 } from './db';
@@ -23,6 +25,7 @@ import { validateBudgetBody } from './validators';
 export {
   buildNavigationLink,
   calculateDistance,
+  changeMessage,
   cn,
   customSwal,
   deleteCompromise,
@@ -31,6 +34,7 @@ export {
   getBusyDates,
   getEmoji,
   getEvents,
+  getMessage,
   getPriceFromDB,
   manageBudgetResponse,
   postCompromise,

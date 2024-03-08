@@ -1,5 +1,9 @@
 import { Compromise, Event } from '@/interface';
 
+export interface ChangeMessageProps {
+  message: string;
+}
+
 export interface EventDescriptionProps {
   event: Event;
 }

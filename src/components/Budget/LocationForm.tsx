@@ -48,6 +48,7 @@ const LocationForm = <T extends FormSchemas>(props: LocationFormProps<T>) => {
             control={control}
             getInputProps={getInputProps}
             getSuggestionItemProps={getSuggestionItemProps}
+            helperText="Este campo usa Google Maps, y es sensible a acentos (perdón!)"
             label="Ubicación (exacta)"
             loading={loading}
             name={name}

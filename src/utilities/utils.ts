@@ -119,9 +119,9 @@ export const generateEventMailData = ({
   const os = parser.getOS().name || 'N/A';
 
   return `<main style="font-family: Arial">
-  <p>
-    El presupuesto es de
-    <b>$${formattedPrice}</b>
+  <p>El presupuesto es de</p>
+  <p style="text-align: center; font-weight: bold; font-size: 2rem; margin-top: 0.25rem">
+    $${formattedPrice}
   </p>
   <table style="border-collapse: collapse; width: 100%; max-width: 500px; margin-bottom: 1rem;">
     <tbody>
@@ -253,6 +253,7 @@ export const generateEventMailData = ({
       </tr>
     </tbody>
   </table>
+  <p style="font-size: 0.75rem">${userAgent}</p>
 </main>
 `;
 };
