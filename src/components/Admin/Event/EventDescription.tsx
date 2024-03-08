@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import EventElement from './EventElement';
+import EventElement from '../Common/EventElement';
 import dayjs from 'dayjs';
 import { FaCarSide, FaWhatsapp } from 'react-icons/fa6';
 
@@ -11,14 +11,12 @@ import { buildNavigationLink, getAmountOfHours } from '@/utilities';
 
 import { koulen } from '@/styles/fonts';
 
-import { EventDescriptionProps } from '../interface/admin';
+import { EventDescriptionProps } from '../../interface/admin';
 
 const EventDescription = (props: EventDescriptionProps) => {
   const { event } = props;
 
-  const isCompromise = !('title' in event);
-
-  //   From ISO to Vie 08 Mar without dayjs
+  // From ISO to Vie 08 Mar without dayjs
   const formattedMainDate = new Date(event.date)
     .toLocaleDateString('es-AR', {
       weekday: 'short',
@@ -28,8 +26,6 @@ const EventDescription = (props: EventDescriptionProps) => {
     .toUpperCase();
   const formattedDetailsDate = dayjs(event.date).format('DD/MM/YYYY');
 
-  if (isCompromise) return null;
-
   const amountOfHours = getAmountOfHours({
     date: event.date,
     start: event.startTime,
@@ -37,10 +33,8 @@ const EventDescription = (props: EventDescriptionProps) => {
   });
 
   return (
-    <article className="rounded-xl bg-gray-200/50 p-3 text-start text-gray-700">
-      <h2 className={`${koulen.className} -mb-1 mb-0 text-2xl`}>
-        {event.title}
-      </h2>
+    <article className="mb-3 rounded-xl bg-gray-200/50 p-3 text-start text-gray-700">
+      <h2 className={`${koulen.className} -mb-1 text-2xl`}>{event.title}</h2>
       <h3 className="font-bold">{formattedMainDate}</h3>
       <div className="divider my-0" />
       <EventElement label="Fecha" value={formattedDetailsDate} />

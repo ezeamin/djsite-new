@@ -1,7 +1,11 @@
 import { Compromise, Event } from '@/interface';
 
 export interface EventDescriptionProps {
-  event: Event | Compromise;
+  event: Event;
+}
+
+export interface CompromiseDescriptionProps {
+  compromise: Compromise;
 }
 
 export interface EventElementProps {
@@ -9,4 +13,9 @@ export interface EventElementProps {
   value: string;
   className?: string;
   bold?: boolean;
+}
+
+export interface DeleteCompromiseButtonProps {
+  id: Compromise['id'];
+  reason: Compromise['reason'];
 }

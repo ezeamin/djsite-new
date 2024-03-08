@@ -2,8 +2,8 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
+import EventList from '@/components/Admin/Common/EventList';
 import DashboardHeader from '@/components/Admin/DashboardHeader';
-import EventList from '@/components/Admin/EventList';
 
 import { PATHS } from '@/constants/paths';
 

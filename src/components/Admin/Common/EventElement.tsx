@@ -1,6 +1,6 @@
 import { cn } from '@/utilities';
 
-import { EventElementProps } from '../interface/admin';
+import { EventElementProps } from '../../interface/admin';
 
 const EventElement = (props: EventElementProps) => {
   const { label, value, className = '', bold = false } = props;

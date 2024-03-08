@@ -1,6 +1,6 @@
 import { cn } from './cn';
 import { customSwal } from './customSwal';
-import { getEvents } from './db';
+import { deleteCompromise, getEvents, postCompromise, postEvent } from './db';
 import { fetchFn } from './fetchFn';
 import { getPriceFromDB } from './gsheets';
 import { sendPingMail } from './mailing';
@@ -18,11 +18,14 @@ export {
   calculateDistance,
   cn,
   customSwal,
+  deleteCompromise,
   fetchFn,
   getAmountOfHours,
   getEvents,
   getPriceFromDB,
   manageBudgetResponse,
+  postCompromise,
+  postEvent,
   removeLineBreaks,
   sendPingMail,
   validateBudgetBody,

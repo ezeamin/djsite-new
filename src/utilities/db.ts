@@ -15,7 +15,7 @@ export const getEvents = async ({
   const eventsPromise = prisma.event.findMany({
     where: {
       date: {
-        ...(finished ? { gte: new Date() } : { lt: new Date() }),
+        ...(finished ? { lt: new Date() } : { gte: new Date() }),
       },
     },
     include: {
@@ -31,7 +31,7 @@ export const getEvents = async ({
   const compromisesPromise = prisma.compromise.findMany({
     where: {
       date: {
-        ...(finished ? { gte: new Date() } : { lt: new Date() }),
+        ...(finished ? { lt: new Date() } : { gte: new Date() }),
       },
     },
   });
@@ -98,6 +98,33 @@ export const postEvent = async (event: /* CreateEventSchema */ any) => {
           phone,
         },
       },
+    },
+  });
+};
+
+export const postCompromise = async (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  compromise: /* CreateCompromiseSchema */ any
+) => {
+  const reason = compromise.reason
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/ñ/g, 'n')
+    .replace(/Ñ/g, 'N');
+
+  await prisma.compromise.create({
+    data: {
+      reason,
+      date: compromise.date,
+      time: compromise.time,
+    },
+  });
+};
+
+export const deleteCompromise = async (id: string) => {
+  await prisma.compromise.delete({
+    where: {
+      id,
     },
   });
 };

@@ -1,8 +1,11 @@
-import EventDescription from './EventDescription';
+import CompromiseDescription from '../Compromise/CompromiseDescription';
+import EventDescription from '../Event/EventDescription';
 
 import { getEvents } from '@/utilities';
 
 import { Compromise, Event } from '@/interface';
+
+export const revalidate = 3600; // 1 hour
 
 const EventList = async () => {
   const events = (await getEvents({
@@ -20,9 +23,13 @@ const EventList = async () => {
 
   return (
     <section className="mt-3">
-      {events.map((event) => (
-        <EventDescription event={event} key={event.id} />
-      ))}
+      {events.map((event) =>
+        'title' in event ? (
+          <EventDescription event={event} key={event.id} />
+        ) : (
+          <CompromiseDescription compromise={event} key={event.id} />
+        )
+      )}
     </section>
   );
 };
