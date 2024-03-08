@@ -8,6 +8,7 @@ import {
   getMessage,
   postCompromise,
   postEvent,
+  validateDiscount,
 } from './db';
 import { fetchFn } from './fetchFn';
 import { getPriceFromDB } from './gsheets';
@@ -42,4 +43,5 @@ export {
   removeLineBreaks,
   sendPingMail,
   validateBudgetBody,
+  validateDiscount,
 };

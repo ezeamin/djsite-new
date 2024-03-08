@@ -8,7 +8,7 @@ dayjs.extend(timezone);
 export const validateBudgetBody = (
   body: Record<string, string>
 ): { isValid: boolean; message?: string } => {
-  const { date, time, location, hours, service } = body;
+  const { date, time, location, hours, service, discountCode } = body;
 
   if (!date || !time || !location || !hours || !service) {
     return {

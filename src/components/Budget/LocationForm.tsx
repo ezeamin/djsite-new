@@ -48,8 +48,7 @@ const LocationForm = <T extends FormSchemas>(props: LocationFormProps<T>) => {
             control={control}
             getInputProps={getInputProps}
             getSuggestionItemProps={getSuggestionItemProps}
-            helperText="Este campo usa Google Maps, y es sensible a acentos (perdón!)"
-            label="Ubicación (exacta)"
+            label="Dirección del evento"
             loading={loading}
             name={name}
             options={suggestions.map((s) => ({
@@ -62,6 +61,9 @@ const LocationForm = <T extends FormSchemas>(props: LocationFormProps<T>) => {
           />
         )}
       </PlacesAutocomplete>
+      <p className="rounded bg-gray-800/25 px-3 py-2 text-sm">
+        Este campo usa Google Maps, y es sensible a acentos (perdón!)
+      </p>
     </>
   );
 };

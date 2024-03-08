@@ -39,6 +39,8 @@ export const getBusyDates = async () => {
   return data;
 };
 
+// MESSAGE -------------------------------------
+
 export const getMessage = async () => {
   const messages = await prisma.message.findMany({
     select: {
@@ -80,6 +82,22 @@ export const changeMessage = async (message: string) => {
 
   revalidatePath('/admin/events');
   revalidatePath('/budget');
+};
+
+// DISCOUNTS -------------------------------------
+
+export const validateDiscount = async (code: string) => {
+  const discount = await prisma.discountCodes.findFirst({
+    where: {
+      code,
+    },
+    select: {
+      discount: true,
+    },
+  });
+
+  if (discount?.discount) return discount.discount;
+  return null;
 };
 
 // EVENTS -------------------------------------

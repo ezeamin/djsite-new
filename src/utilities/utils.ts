@@ -80,10 +80,12 @@ export const generateEventData = ({
   formData,
   price,
   distance,
+  discount,
 }: {
   formData: BudgetFormSchema;
   price: number;
   distance: number;
+  discount: number | null;
 }): string => {
   const formattedDate = dayjs(formData.date).format('DD/MM/YYYY');
 
@@ -93,7 +95,7 @@ export const generateEventData = ({
   *Tiempo*: ${formData.hours} horas
   *Servicio*: ${formData.service}
 
-El presupuesto es de: *$${formatPrice(price)}*\n\n`;
+El presupuesto es de: *$${formatPrice(price)}* ${discount && `(descuento aplicado del ${discount}%: ${formData.discountCode})`}\n\n`;
 };
 
 export const generateEventMailData = ({
@@ -261,7 +263,8 @@ export const generateEventMailData = ({
 const sendWhatsappMessage = async (
   formData: BudgetFormSchema,
   price: number,
-  distance: number
+  distance: number,
+  discount: number | null
 ) => {
   const { value: name } = await Swal.fire({
     title: 'Ingresá tu nombre',
@@ -283,7 +286,7 @@ const sendWhatsappMessage = async (
   if (!name) return;
 
   const text = `Hola Eze! Soy ${name} y quiero presupuestar la siguiente fiesta:
-  ${generateEventData({ formData, price, distance })}`;
+  ${generateEventData({ formData, price, distance, discount })}`;
 
   const encodedText = encodeURI(text);
   const encodedLink = buildLocationMap(formData.location).replaceAll(
@@ -298,7 +301,10 @@ const sendWhatsappMessage = async (
 export const manageBudgetResponse = async (
   formData: BudgetFormSchema,
   res: Response,
-  data: { data: { price: number; distance: number } | null; message: string }
+  data: {
+    data: { price: number; distance: number; discount: number | null } | null;
+    message: string;
+  }
 ) => {
   if (!res.ok) {
     toast.warning(data.message || 'Ocurrió un error desconocido. Perdon! 😔');
@@ -328,9 +334,10 @@ export const manageBudgetResponse = async (
 
   const price = data.data?.price;
   const distance = data.data?.distance;
+  const discount = data.data?.discount;
   const action = await Swal.fire({
     title: `$${formatPrice(price)} 😉`,
-    html: '<p>Este es el presupuesto <b>ESTIMADO</b> para tu evento.</p><br/><p>¿Te gustaría reservar la fecha?</p><p>(Te voy a llevar a mi WhatsApp)</b>',
+    html: `<div>${discount && `<div class="mb-2 badge badge-success">Descuento de ${discount}% aplicado 🎉</div>`}<p>Este es el presupuesto <b>ESTIMADO</b> para tu evento.</p><br/><p>¿Te gustaría reservar la fecha?</p><p>(Te voy a llevar a mi WhatsApp)</b></div>`,
     showCancelButton: true,
     confirmButtonText: 'Sip, ir a WhatsApp! 📲',
     cancelButtonText: 'No gracias, soy aburrido 😔',
@@ -339,7 +346,7 @@ export const manageBudgetResponse = async (
   });
 
   if (action.isConfirmed) {
-    sendWhatsappMessage(formData, price!, distance);
+    sendWhatsappMessage(formData, price!, distance, discount);
   }
 };
 

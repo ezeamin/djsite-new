@@ -24,6 +24,7 @@ export const budgetFormSchema = z
         message: 'Elegí un tipo de servicio: "Básico" ó "Sonido"',
       }),
     }),
+    discountCode: z.string().trim().optional(),
   })
   .refine(dateAfterOrToday, dateAfterOrToday.msg);
 

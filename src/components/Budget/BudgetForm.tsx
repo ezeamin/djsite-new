@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import LoadingBackdrop from '../Loading/LoadingBackdrop';
+import TextInput from '../ui/TextInput/TextInput';
 import DateAndTimeForm from './DateAndTimeForm';
 import HoursForm from './HoursForm';
 import LocationForm from './LocationForm';
@@ -25,10 +26,17 @@ import { BudgetFormProps } from '../interface/budget';
 const BudgetForm = (props: BudgetFormProps) => {
   const { busyDates } = props;
 
-  const { control, onSubmitMiddleware, areAllFieldsFilled, setValue, watch } =
+  const { control, onSubmitMiddleware, setValue, watch } =
     useZodForm(budgetFormSchema);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const date = watch('date');
+  const time = watch('time');
+  const location = watch('location');
+  const hours = watch('hours');
+  const service = watch('service');
+  const areAllFieldsFilled = date && time && location && hours && service;
 
   // ---------------------------------------
   // HANDLERS
@@ -69,6 +77,14 @@ const BudgetForm = (props: BudgetFormProps) => {
       <LocationForm control={control} name="location" setValue={setValue} />
       <HoursForm<BudgetFormSchema> control={control} name="hours" />
       <ServiceForm<BudgetFormSchema> control={control} name="service" />
+      <TextInput
+        className="w-full"
+        control={control}
+        label="Código de descuento"
+        maxLength={20}
+        name="discountCode"
+        placeholder="Ingresá el código"
+      />
       <button
         className={`${areAllFieldsFilled ? 'three-d-button--red' : 'bg-gray-300'} btn mt-2 border-0 text-xl transition-colors ${koulen.className}`}
         disabled={!areAllFieldsFilled}

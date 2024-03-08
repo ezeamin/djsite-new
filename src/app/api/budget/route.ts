@@ -3,6 +3,7 @@ import {
   getPriceFromDB,
   sendPingMail,
   validateBudgetBody,
+  validateDiscount,
 } from '@/utilities';
 
 export const POST = async (request: Request): Promise<Response> => {
@@ -41,7 +42,8 @@ export const POST = async (request: Request): Promise<Response> => {
     );
   }
 
-  const price = await getPriceFromDB(body, distance);
+  const discount = await validateDiscount(body.discountCode);
+  const price = await getPriceFromDB(body, distance, discount);
 
   if (price === 0) {
     return Response.json(
@@ -54,11 +56,15 @@ export const POST = async (request: Request): Promise<Response> => {
     );
   }
 
-  // Get IP
+  // Send mail
   const ip =
     request.headers.get('x-real-ip') || request.headers.get('x-forwarded-for');
   const userAgent = request.headers.get('user-agent');
-  await sendPingMail({ formData: body, price, distance, ip, userAgent });
+  if (process.env.NODE_ENV === 'production')
+    await sendPingMail({ formData: body, price, distance, ip, userAgent });
 
-  return Response.json({ data: { price, distance }, message: null });
+  return Response.json({
+    data: { price, distance, discount },
+    message: null,
+  });
 };
