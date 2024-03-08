@@ -1,5 +1,6 @@
 import { AuthFormSchema } from './schemas/authFormSchema';
 import { BudgetFormSchema } from './schemas/budgetFormSchema';
+import { DiscountCodesSchema } from './schemas/discountCodesSchema';
 
 /**
  * This folder should include all validations schemas across the project.
@@ -13,4 +14,7 @@ import { BudgetFormSchema } from './schemas/budgetFormSchema';
  */
 
 // Use | to join all validation schemas types.
-export type FormSchemas = BudgetFormSchema | AuthFormSchema;
+export type FormSchemas =
+  | BudgetFormSchema
+  | AuthFormSchema
+  | DiscountCodesSchema;

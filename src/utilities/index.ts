@@ -3,10 +3,14 @@ import { customSwal } from './customSwal';
 import {
   changeMessage,
   deleteCompromise,
+  deleteDiscountCode,
   getBusyDates,
+  getDiscountCode,
+  getDiscountCodes,
   getEvents,
   getMessage,
   postCompromise,
+  postDiscountCode,
   postEvent,
   validateDiscount,
 } from './db';
@@ -21,7 +25,7 @@ import {
   manageBudgetResponse,
   removeLineBreaks,
 } from './utils';
-import { validateBudgetBody } from './validators';
+import { validateBudgetBody, validateDiscountCodeBody } from './validators';
 
 export {
   buildNavigationLink,
@@ -30,18 +34,23 @@ export {
   cn,
   customSwal,
   deleteCompromise,
+  deleteDiscountCode,
   fetchFn,
   getAmountOfHours,
   getBusyDates,
+  getDiscountCode,
+  getDiscountCodes,
   getEmoji,
   getEvents,
   getMessage,
   getPriceFromDB,
   manageBudgetResponse,
   postCompromise,
+  postDiscountCode,
   postEvent,
   removeLineBreaks,
   sendPingMail,
   validateBudgetBody,
   validateDiscount,
+  validateDiscountCodeBody,
 };

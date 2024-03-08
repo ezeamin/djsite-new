@@ -12,10 +12,15 @@ const BackButton = () => {
 
   if (pathname === '/') return null;
 
+  let url = PATHS.HOME;
+  if (pathname.includes('admin') && !pathname.includes('auth')) {
+    url = PATHS.ADMIN.EVENTS;
+  }
+
   return (
     <Link
       className="three-d-button fixed bottom-3 left-3 z-[9999999] flex h-[50px] w-[50px] items-center justify-center rounded-full text-gray-700"
-      href={PATHS.HOME}
+      href={url}
     >
       <IoChevronBack />
     </Link>

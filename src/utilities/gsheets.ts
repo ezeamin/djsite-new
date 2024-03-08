@@ -69,49 +69,54 @@ export const getPriceFromDB = async (
   const dataRange = 'B3:G5';
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${dataRange}?key=${GOOGLE_MATRIX_API_KEY}`;
 
-  const res = await fetch(url);
-  const data = await res.json();
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
 
-  if (!res.ok || !data || data.error) {
-    return 0;
-  }
-
-  const isBasic = formData.service === 'Basico';
-  let distanceRange = '';
-  if (distance < 5) {
-    distanceRange = '5km';
-  } else if (distance < 10) {
-    distanceRange = '10km';
-  } else {
-    distanceRange = '20km';
-  }
-
-  switch (distanceRange) {
-    case '5km':
-      return calculatePrice({
-        isBasic,
-        startColumn: 0,
-        data,
-        hours: formData.hours,
-        discount,
-      });
-    case '10km':
-      return calculatePrice({
-        isBasic,
-        startColumn: 2,
-        data,
-        hours: formData.hours,
-        discount,
-      });
-    case '20km':
-      return calculatePrice({
-        isBasic,
-        startColumn: 4,
-        data,
-        hours: formData.hours,
-        discount,
-      });
-    default:
+    if (!res.ok || !data || data.error) {
       return 0;
+    }
+
+    const isBasic = formData.service === 'Basico';
+    let distanceRange = '';
+    if (distance < 5) {
+      distanceRange = '5km';
+    } else if (distance < 10) {
+      distanceRange = '10km';
+    } else {
+      distanceRange = '20km';
+    }
+
+    switch (distanceRange) {
+      case '5km':
+        return calculatePrice({
+          isBasic,
+          startColumn: 0,
+          data,
+          hours: formData.hours,
+          discount,
+        });
+      case '10km':
+        return calculatePrice({
+          isBasic,
+          startColumn: 2,
+          data,
+          hours: formData.hours,
+          discount,
+        });
+      case '20km':
+        return calculatePrice({
+          isBasic,
+          startColumn: 4,
+          data,
+          hours: formData.hours,
+          discount,
+        });
+      default:
+        return 0;
+    }
+  } catch (e) {
+    console.error('ERROR GETTING PRICE FROM GSHEETS', e);
+    return 0;
   }
 };

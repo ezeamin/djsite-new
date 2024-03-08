@@ -41,14 +41,14 @@ export const calculateDistance = async (location: string): Promise<number> => {
   const API_KEY = process.env.GOOGLE_MATRIX_API_KEY;
   const url = `https://maps.googleapis.com/maps/api/distancematrix/json?destinations=${destination}&origins=${originEncoded}&key=${API_KEY}`;
 
-  const body = await fetch(url, {
-    headers: {
-      'User-Agent': 'node.js',
-    },
-  });
-  const data = await body.json();
-
   try {
+    const body = await fetch(url, {
+      headers: {
+        'User-Agent': 'node.js',
+      },
+    });
+    const data = await body.json();
+
     let result = data.rows[0].elements[0].distance.text.split(' ')[0];
     if (result.includes(',')) result = result.replace(',', '');
 
@@ -56,6 +56,7 @@ export const calculateDistance = async (location: string): Promise<number> => {
 
     return value;
   } catch (e) {
+    console.error('ERROR CALCULATING DISTANCE', e);
     return 0;
   }
 };
@@ -95,19 +96,21 @@ export const generateEventData = ({
   *Tiempo*: ${formData.hours} horas
   *Servicio*: ${formData.service}
 
-El presupuesto es de: *$${formatPrice(price)}* ${discount && `(descuento aplicado del ${discount}%: ${formData.discountCode})`}\n\n`;
+El presupuesto es de: *$${formatPrice(price)}* ${discount ? `(descuento aplicado del ${discount}%: ${formData.discountCode})` : ''}\n\n`;
 };
 
 export const generateEventMailData = ({
   formData,
   price,
   distance,
+  discount,
   ip,
   userAgent,
 }: {
   formData: BudgetFormSchema;
   price: number;
   distance: number;
+  discount: number | null;
   ip: string | null;
   userAgent: string | null;
 }): string => {
@@ -197,6 +200,20 @@ export const generateEventMailData = ({
         </td>
         <td style="border: 1px solid #ccc; padding: 0.5rem">
           ${formData.service}
+        </td>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #ccc;
+            background-color: #f2f2f2;
+            padding: 0.5rem;
+          "
+        >
+          Código de descuento
+        </td>
+        <td style="border: 1px solid #ccc; padding: 0.5rem">
+          ${`${formData.discountCode} ${discount ? `- ✅ ${discount}%` : '- ❌'}` || 'N/A'}
         </td>
       </tr>
     </tbody>
@@ -337,7 +354,7 @@ export const manageBudgetResponse = async (
   const discount = data.data?.discount;
   const action = await Swal.fire({
     title: `$${formatPrice(price)} 😉`,
-    html: `<div>${discount && `<div class="mb-2 badge badge-success">Descuento de ${discount}% aplicado 🎉</div>`}<p>Este es el presupuesto <b>ESTIMADO</b> para tu evento.</p><br/><p>¿Te gustaría reservar la fecha?</p><p>(Te voy a llevar a mi WhatsApp)</b></div>`,
+    html: `<div>${discount ? `<div class="mb-2 badge badge-success text-white">Descuento del ${discount}% aplicado 🎉</div>` : ''}<p>Este es el presupuesto <b>ESTIMADO</b> para tu evento.</p><br/><p>¿Te gustaría reservar la fecha?</p><p>(Te voy a llevar a mi WhatsApp)</b></div>`,
     showCancelButton: true,
     confirmButtonText: 'Sip, ir a WhatsApp! 📲',
     cancelButtonText: 'No gracias, soy aburrido 😔',

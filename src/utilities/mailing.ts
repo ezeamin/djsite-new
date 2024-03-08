@@ -24,12 +24,14 @@ export const sendPingMail = async ({
   formData,
   price,
   distance,
+  discount,
   ip,
   userAgent,
 }: {
   formData: BudgetFormSchema;
   price: number;
   distance: number;
+  discount: number | null;
   ip: string | null;
   userAgent: string | null;
 }) => {
@@ -37,7 +39,14 @@ export const sendPingMail = async ({
     from: MAIL_USER,
     to: MAIL_USER,
     subject: 'Nuevo presupuesto!!1! 🥳😎',
-    html: generateEventMailData({ formData, price, distance, ip, userAgent }),
+    html: generateEventMailData({
+      formData,
+      price,
+      distance,
+      discount,
+      ip,
+      userAgent,
+    }),
   };
 
   try {

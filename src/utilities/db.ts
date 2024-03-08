@@ -89,7 +89,7 @@ export const changeMessage = async (message: string) => {
 export const validateDiscount = async (code: string) => {
   const discount = await prisma.discountCodes.findFirst({
     where: {
-      code,
+      code: code.toUpperCase(),
     },
     select: {
       discount: true,
@@ -98,6 +98,56 @@ export const validateDiscount = async (code: string) => {
 
   if (discount?.discount) return discount.discount;
   return null;
+};
+
+export const getDiscountCodes = async () => {
+  const discountCodes = await prisma.discountCodes.findMany({
+    select: {
+      id: true,
+      code: true,
+      discount: true,
+    },
+  });
+
+  return discountCodes;
+};
+
+export const getDiscountCode = async (id: string | undefined) => {
+  if (!id) return null;
+
+  const discountCodes = await prisma.discountCodes.findUnique({
+    where: {
+      id,
+    },
+    select: {
+      id: true,
+      code: true,
+      discount: true,
+    },
+  });
+
+  return discountCodes;
+};
+
+export const postDiscountCode = async (code: string, discount: number) => {
+  await prisma.discountCodes.create({
+    data: {
+      code: code.toUpperCase(),
+      discount,
+    },
+  });
+
+  revalidatePath('/admin/discount-codes');
+};
+
+export const deleteDiscountCode = async (id: string) => {
+  await prisma.discountCodes.delete({
+    where: {
+      id,
+    },
+  });
+
+  revalidatePath('/admin/discount-codes');
 };
 
 // EVENTS -------------------------------------

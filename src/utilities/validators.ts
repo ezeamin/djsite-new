@@ -61,3 +61,39 @@ export const validateBudgetBody = (
 
   return { isValid: true };
 };
+
+export const validateDiscountCodeBody = (
+  body: Record<string, string>
+): { isValid: boolean; message?: string } => {
+  const { code, discount } = body;
+
+  if (!code || !discount) {
+    return {
+      isValid: false,
+      message: 'Revisá la información. Algun campo no está correcto, perdon!',
+    };
+  }
+
+  if (code.length < 5 || code.length > 20) {
+    return {
+      isValid: false,
+      message: 'El código debe tener entre 5 y 20 caracteres',
+    };
+  }
+
+  if (typeof discount === 'string') {
+    return {
+      isValid: false,
+      message: 'El descuento debe ser un número',
+    };
+  }
+
+  if (discount < 0 || discount > 100) {
+    return {
+      isValid: false,
+      message: 'El descuento debe ser entre 0 y 100',
+    };
+  }
+
+  return { isValid: true };
+};

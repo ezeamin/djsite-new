@@ -9,6 +9,7 @@ export const PATHS = {
     AUTH: '/admin/auth',
     EVENTS: '/admin/events',
     HISTORY: '/admin/history',
+    DISCOUNT_CODES: '/admin/discount-codes',
     CREATE: {
       EVENT: '/admin/events/create',
       COMPROMISE: '/admin/compromise/create',

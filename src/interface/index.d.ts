@@ -53,3 +53,13 @@ export type MinimalEvent = {
       title: never;
     }
 );
+
+export interface DiscountCode {
+  id: string;
+  code: string;
+  discount: number;
+}
+
+export interface PageProps {
+  searchParams: Record<string, string>;
+}

@@ -50,11 +50,11 @@ const ChangeMessage = (props: ChangeMessageProps) => {
     <>
       {isLoading && createPortal(<LoadingBackdrop open />, document.body)}
       <button
-        className={`three-d-button--gray btn w-full ${koulen.className} mt-2 text-lg`}
+        className={`three-d-button--gray btn w-full ${koulen.className} text-lg`}
         type="button"
         onClick={handleClick}
       >
-        CARGAR MENSAJE NUEVO
+        MENSAJE
       </button>
     </>
   );
