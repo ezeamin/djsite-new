@@ -77,6 +77,10 @@ export const buildNavigationLink = (location: string): string => {
   return `https://www.google.com/maps/dir/?api=1&destination=${encodedLoc}`;
 };
 
+export const getOriginalPrice = (price: number, discount: number): number => {
+  return price / ((100 - discount) / 100);
+};
+
 export const generateEventData = ({
   formData,
   price,
@@ -131,9 +135,18 @@ export const generateEventMailData = ({
 
   return `<main style="box-sizing: border-box; font-family: Arial; display: flex; flex-direction: column; justify-content: center">
   <p>El presupuesto es de</p>
-  <p style="text-align: center; font-weight: bold; font-size: 2rem; margin-top: 0.25rem">
-    $${formattedPrice}
-  </p>
+  <div style="text-align: center; margin-bottom: 1rem; margin-top: 0.25rem;">
+    <p style="font-weight: bold; font-size: 2rem; margin-bottom: 0;">
+      $${formattedPrice}
+    </p>
+    ${
+      discount
+        ? `<p style="font-size: 1rem; margin: 0; text-decoration: line-through;">
+            $${getOriginalPrice(price, discount)}
+          </p>`
+        : ''
+    }
+  </div>
   <table style="border-collapse: collapse; width: 100%; max-width: 500px; margin-bottom: 1rem;">
     <tbody>
       <tr>
@@ -308,6 +321,7 @@ const sendWhatsappMessage = async (
     cancelButtonColor: '#8d8d8d',
     confirmButtonText: 'Continuar a WhatsApp 😎',
     cancelButtonText: 'Cancelar 🥺',
+    scrollbarPadding: false,
     inputValidator: (value): string | undefined => {
       if (!value.trim()) {
         return 'Por favor, escribí tu nombre';
@@ -352,6 +366,7 @@ export const manageBudgetResponse = async (
       confirmButtonColor: '#395aa8',
       confirmButtonText: 'Okis, mandar WhatsApp 📲',
       cancelButtonText: 'No gracias, soy aburrido 😔',
+      scrollbarPadding: false,
     });
     if (action.isConfirmed) {
       window.open(process.env.NEXT_PUBLIC_CONTACT_LINK, '_blank');
@@ -375,12 +390,13 @@ export const manageBudgetResponse = async (
 
   const action = await Swal.fire({
     title: `$${formatPrice(price)} 😉`,
-    html: `<div>${discountBadge}<p>Este es el presupuesto <b>ESTIMADO</b> para tu evento.</p><br/><p>¿Te gustaría reservar la fecha?</p><p>(Te voy a llevar a mi WhatsApp)</b></div>`,
+    html: `<div>${discount ? `<p style="text-decoration: line-through; margin-top: 0;">$${getOriginalPrice(price, discount)}</p>` : ''}${discountBadge}<p style="text-wrap: balance;">Este es el presupuesto <b>ESTIMADO</b> para tu evento.</p><br/><p>¿Te gustaría reservar la fecha?</p><p>(Te voy a llevar a mi WhatsApp)</b></div>`,
     showCancelButton: true,
     confirmButtonText: 'Sip, ir a WhatsApp! 📲',
     cancelButtonText: 'No gracias, soy aburrido 😔',
     confirmButtonColor: '#395aa8',
     footer: `<p class="text-center -my-2">Es importante leer los&nbsp;<a href="/terms-and-conditions" target="_blank" class="mb-0 form__swal__link">términos y condiciones</a> (porfa)</p>`,
+    scrollbarPadding: false,
   });
 
   if (action.isConfirmed) {
@@ -425,7 +441,7 @@ export const getAmountOfHours = ({
   return diff;
 };
 
-export const getEmoji = (type: 'event' | 'compromise') => {
+export const getEmoji = () => {
   const icons = ['🥳', '🎉', '🪅', '🎆', '🎈'];
 
   return icons[Math.floor(Math.random() * icons.length)];

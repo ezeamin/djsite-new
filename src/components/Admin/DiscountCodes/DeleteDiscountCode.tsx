@@ -22,6 +22,7 @@ const DeleteDiscountCode = (props: DeleteDiscountCodeProps) => {
       cancelButtonColor: '#333333',
       confirmButtonText: 'Sí, borrar',
       cancelButtonText: 'Cancelar',
+      scrollbarPadding: false,
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {

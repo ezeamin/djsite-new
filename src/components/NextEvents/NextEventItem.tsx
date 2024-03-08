@@ -20,7 +20,7 @@ const NextEventItem = (props: NextEventItemProps) => {
   return (
     <article className="mb-3 rounded-xl bg-gray-200/50 p-3 text-center text-gray-700">
       <h2 className={`${koulen.className} -mb-1 text-2xl`}>
-        {event.title} {getEmoji('event')}
+        {event.title} {getEmoji()}
       </h2>
       <div className="divider my-0" />
       <h3 className={`${koulen.className} text-xl`}>

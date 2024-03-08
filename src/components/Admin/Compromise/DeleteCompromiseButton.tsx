@@ -22,6 +22,7 @@ const DeleteCompromiseButton = (props: DeleteCompromiseButtonProps) => {
       cancelButtonColor: '#333333',
       confirmButtonText: 'Sí, borrar',
       cancelButtonText: 'Cancelar',
+      scrollbarPadding: false,
     }).then(async (result) => {
       if (result.isConfirmed) {
         await deleteCompromise(id);

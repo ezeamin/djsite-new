@@ -31,6 +31,7 @@ const ChangeMessage = (props: ChangeMessageProps) => {
       confirmButtonText: 'Cargar 🤙🏻',
       cancelButtonText: 'Cancelar',
       inputValue: message,
+      scrollbarPadding: false,
     }).then(async (action) => {
       if (action.isConfirmed) {
         setIsLoading(true);

@@ -13,7 +13,7 @@ export const getBusyDates = async () => {
   const events = await prisma.event.findMany({
     where: {
       date: {
-        gte: new Date(),
+        gte: `${new Date().toISOString().split('T')[0]}T00:00:00.000Z`,
       },
     },
     select: {
@@ -25,7 +25,7 @@ export const getBusyDates = async () => {
   const compromises = await prisma.compromise.findMany({
     where: {
       date: {
-        gte: new Date(),
+        gte: `${new Date().toISOString().split('T')[0]}T00:00:00.000Z`,
       },
     },
     select: {

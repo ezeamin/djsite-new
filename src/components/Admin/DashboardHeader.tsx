@@ -23,6 +23,7 @@ const DashboardHeader = () => {
       cancelButtonColor: '#333333',
       confirmButtonText: 'Sí, cerrar sesión',
       cancelButtonText: 'Cancelar',
+      scrollbarPadding: false,
     }).then(async (action) => {
       if (action.isConfirmed) {
         await fetch('/api/auth/logout', {

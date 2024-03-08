@@ -1,5 +1,4 @@
 import { cn } from './cn';
-import { customSwal } from './customSwal';
 import {
   changeMessage,
   deleteCompromise,
@@ -32,7 +31,6 @@ export {
   calculateDistance,
   changeMessage,
   cn,
-  customSwal,
   deleteCompromise,
   deleteDiscountCode,
   fetchFn,
