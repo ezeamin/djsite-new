@@ -20,7 +20,9 @@ const CompromiseDescription = (props: CompromiseDescriptionProps) => {
       day: '2-digit',
       month: 'short',
     })
-    .toUpperCase();
+    .toUpperCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
   const formattedDetailsDate = dayjs(compromise.date).format('DD/MM/YYYY');
 
   return (

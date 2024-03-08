@@ -378,3 +378,9 @@ export const getAmountOfHours = ({
 
   return diff;
 };
+
+export const getEmoji = (type: 'event' | 'compromise') => {
+  const icons = ['🥳', '🎉', '🪅', '🎆', '🎈'];
+
+  return icons[Math.floor(Math.random() * icons.length)];
+};

@@ -8,6 +8,7 @@ import {
   buildNavigationLink,
   calculateDistance,
   getAmountOfHours,
+  getEmoji,
   manageBudgetResponse,
   removeLineBreaks,
 } from './utils';
@@ -21,6 +22,7 @@ export {
   deleteCompromise,
   fetchFn,
   getAmountOfHours,
+  getEmoji,
   getEvents,
   getPriceFromDB,
   manageBudgetResponse,

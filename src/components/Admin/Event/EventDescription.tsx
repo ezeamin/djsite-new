@@ -23,7 +23,9 @@ const EventDescription = (props: EventDescriptionProps) => {
       day: '2-digit',
       month: 'short',
     })
-    .toUpperCase();
+    .toUpperCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
   const formattedDetailsDate = dayjs(event.date).format('DD/MM/YYYY');
 
   const amountOfHours = getAmountOfHours({

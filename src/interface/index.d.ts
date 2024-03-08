@@ -50,5 +50,6 @@ export type MinimalEvent = {
     }
   | {
       type: 'compromise';
+      title: never;
     }
 );
