@@ -94,26 +94,32 @@ const DiscountCodeForm = (props: DiscountCodeFormProps) => {
     <>
       {isLoading && createPortal(<LoadingBackdrop open />, document.body)}
       <form onSubmit={onSubmitMiddleware(handleSubmit)}>
-        <TextInput
-          className="w-full"
-          control={control}
-          label="Código"
-          name="code"
-        />
-        <TextInput
-          className="mt-1 w-full"
-          control={control}
-          label="Descuento (%)"
-          name="discount"
-        />
-        <Grid container gap={2} className="mt-2">
+        <Grid container gap={2}>
+          <Grid item sm={6} xs={12}>
+            <TextInput
+              className="w-full"
+              control={control}
+              label="Código"
+              name="code"
+            />
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <TextInput
+              className="w-full"
+              control={control}
+              label="Descuento (%)"
+              name="discount"
+            />
+          </Grid>
+        </Grid>
+        <Grid container className="mt-2" gap={2}>
           <Grid item xs={isEditing ? 6 : 12}>
             <button
               className={`${koulen.className} ${!areAllFieldsFilled ? 'bg-gray-200' : 'three-d-button--red'} btn w-full text-lg`}
               disabled={!areAllFieldsFilled}
               type="submit"
             >
-              CARGAR
+              {isEditing ? 'GUARDAR' : 'CARGAR'}
             </button>
           </Grid>
           {isEditing && (

@@ -118,12 +118,14 @@ export const generateEventMailData = ({
   const formattedPrice = formatPrice(price);
   const formattedIp = ip || 'N/A';
 
+  const weekDay = dayjs(formData.date).locale('es').format('dddd');
+
   const parser = new UAParser(userAgent || '');
   const device = parser.getDevice();
   const browser = parser.getBrowser().name || 'N/A';
   const os = parser.getOS().name || 'N/A';
 
-  return `<main style="font-family: Arial">
+  return `<main style="box-sizing: border-box; font-family: Arial; display: flex; flex-direction: column; justify-content: center">
   <p>El presupuesto es de</p>
   <p style="text-align: center; font-weight: bold; font-size: 2rem; margin-top: 0.25rem">
     $${formattedPrice}
@@ -136,12 +138,13 @@ export const generateEventMailData = ({
             border: 1px solid #ccc;
             background-color: #f2f2f2;
             padding: 0.5rem;
+            width: 135px;
           "
         >
           Fecha
         </td>
         <td style="border: 1px solid #ccc; padding: 0.5rem">
-          ${formattedDate}
+          ${weekDay} ${formattedDate}
         </td>
       </tr>
       <tr>
@@ -150,6 +153,7 @@ export const generateEventMailData = ({
             border: 1px solid #ccc;
             background-color: #f2f2f2;
             padding: 0.5rem;
+            width: 135px;
           "
         >
           Turno
@@ -164,6 +168,7 @@ export const generateEventMailData = ({
             border: 1px solid #ccc;
             background-color: #f2f2f2;
             padding: 0.5rem;
+            width: 135px;
           "
         >
           Ubicación
@@ -180,6 +185,7 @@ export const generateEventMailData = ({
             border: 1px solid #ccc;
             background-color: #f2f2f2;
             padding: 0.5rem;
+            width: 135px;
           "
         >
           Tiempo
@@ -194,6 +200,7 @@ export const generateEventMailData = ({
             border: 1px solid #ccc;
             background-color: #f2f2f2;
             padding: 0.5rem;
+            width: 135px;
           "
         >
           Servicio
@@ -208,12 +215,13 @@ export const generateEventMailData = ({
             border: 1px solid #ccc;
             background-color: #f2f2f2;
             padding: 0.5rem;
+            width: 135px;
           "
         >
           Código de descuento
         </td>
         <td style="border: 1px solid #ccc; padding: 0.5rem">
-          ${`${formData.discountCode} ${discount ? `- ✅ ${discount}%` : '- ❌'}` || 'N/A'}
+          ${formData.discountCode ? `${formData.discountCode.toUpperCase()} ${discount ? `- ✅ ${discount}%` : '- ❌'}` : 'N/A'}
         </td>
       </tr>
     </tbody>
@@ -226,6 +234,7 @@ export const generateEventMailData = ({
             border: 1px solid #ccc;
             background-color: #f2f2f2;
             padding: 0.5rem;
+            width: 135px;
           "
         >
           IP
@@ -238,6 +247,7 @@ export const generateEventMailData = ({
             border: 1px solid #ccc;
             background-color: #f2f2f2;
             padding: 0.5rem;
+            width: 135px;
           "
         >
           Navegador
@@ -250,6 +260,7 @@ export const generateEventMailData = ({
             border: 1px solid #ccc;
             background-color: #f2f2f2;
             padding: 0.5rem;
+            width: 135px;
           "
         >
           OS
@@ -262,6 +273,7 @@ export const generateEventMailData = ({
             border: 1px solid #ccc;
             background-color: #f2f2f2;
             padding: 0.5rem;
+            width: 135px;
           "
         >
           Dispositivo
@@ -352,9 +364,14 @@ export const manageBudgetResponse = async (
   const price = data.data?.price;
   const distance = data.data?.distance;
   const discount = data.data?.discount;
+
+  const discountBadge = formData.discountCode
+    ? `${discount ? `<div class="mb-2 badge badge-success text-white">Descuento del ${discount}% aplicado 🎉</div>` : '<div class="mb-2 badge badge-warning text-white">Código de descuento no válido 💨</div>'}`
+    : '';
+
   const action = await Swal.fire({
     title: `$${formatPrice(price)} 😉`,
-    html: `<div>${discount ? `<div class="mb-2 badge badge-success text-white">Descuento del ${discount}% aplicado 🎉</div>` : ''}<p>Este es el presupuesto <b>ESTIMADO</b> para tu evento.</p><br/><p>¿Te gustaría reservar la fecha?</p><p>(Te voy a llevar a mi WhatsApp)</b></div>`,
+    html: `<div>${discountBadge}<p>Este es el presupuesto <b>ESTIMADO</b> para tu evento.</p><br/><p>¿Te gustaría reservar la fecha?</p><p>(Te voy a llevar a mi WhatsApp)</b></div>`,
     showCancelButton: true,
     confirmButtonText: 'Sip, ir a WhatsApp! 📲',
     cancelButtonText: 'No gracias, soy aburrido 😔',

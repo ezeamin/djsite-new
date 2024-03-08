@@ -48,7 +48,7 @@ const LocationForm = <T extends FormSchemas>(props: LocationFormProps<T>) => {
             control={control}
             getInputProps={getInputProps}
             getSuggestionItemProps={getSuggestionItemProps}
-            label="Dirección del evento"
+            label="Dirección del evento (exacta)"
             loading={loading}
             name={name}
             options={suggestions.map((s) => ({
