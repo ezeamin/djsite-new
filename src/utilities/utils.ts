@@ -8,6 +8,17 @@ import { BudgetFormSchema } from '@/forms/schemas/budgetFormSchema';
 
 import { Compromise, Event, MinimalEvent } from '@/interface';
 
+const SCOPES = ['https://www.googleapis.com/auth/calendar'];
+const {
+  GOOGLE_CLIENT_EMAIL,
+  GOOGLE_PRIVATE_KEY,
+  GOOGLE_PROJECT_NUMBER,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_PRIVATE_KEY_ID,
+  GOOGLE_CALENDAR_ID,
+  GOOGLE_UNIVERSE_DOMAIN,
+} = process.env;
+
 /**
  * Usage with template literals. To call the function, do not use parentheses.
  * @param strings
@@ -448,7 +459,9 @@ export const getEmoji = () => {
   return icons[Math.floor(Math.random() * icons.length)];
 };
 
-export const createCalendarEvent = async (event: Event) => {
+export const createCalendarEvent = async (
+  event: Event
+): Promise<string | null> => {
   let UTCStartTime = Number(event.startTime.split(':')[0]) + 3;
   let UTCEndTime = Number(event.endTime.split(':')[0]) + 3;
 
@@ -492,17 +505,6 @@ export const createCalendarEvent = async (event: Event) => {
 
   // GOOGLE CALENDAR ------------------------------------------
 
-  const SCOPES = ['https://www.googleapis.com/auth/calendar'];
-  const {
-    GOOGLE_CLIENT_EMAIL,
-    GOOGLE_PRIVATE_KEY,
-    GOOGLE_PROJECT_NUMBER,
-    GOOGLE_CLIENT_ID,
-    GOOGLE_PRIVATE_KEY_ID,
-    GOOGLE_CALENDAR_ID,
-    GOOGLE_UNIVERSE_DOMAIN,
-  } = process.env;
-
   const jwtClient = new google.auth.GoogleAuth({
     credentials: {
       client_email: GOOGLE_CLIENT_EMAIL,
@@ -522,11 +524,42 @@ export const createCalendarEvent = async (event: Event) => {
 
   try {
     // @ts-expect-error - this is a valid call
-    calendar.events.insert({
+    const data = await calendar.events.insert({
       calendarId: GOOGLE_CALENDAR_ID,
       resource: eventData,
     });
+    // @ts-expect-error - this is a valid call
+    return data.data.id;
   } catch (e) {
     console.error('ERROR INSERTING EVENT', e);
+    return null;
+  }
+};
+
+export const deleteCalendarEvent = async (eventId: string) => {
+  const jwtClient = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: GOOGLE_CLIENT_EMAIL,
+      client_id: GOOGLE_CLIENT_ID,
+      projectId: GOOGLE_PROJECT_NUMBER,
+      private_key: GOOGLE_PRIVATE_KEY,
+      private_key_id: GOOGLE_PRIVATE_KEY_ID,
+      universeDomain: GOOGLE_UNIVERSE_DOMAIN,
+    },
+    scopes: SCOPES,
+  });
+
+  const calendar = google.calendar({
+    version: 'v3',
+    auth: jwtClient,
+  });
+
+  try {
+    calendar.events.delete({
+      calendarId: GOOGLE_CALENDAR_ID,
+      eventId,
+    });
+  } catch (e) {
+    console.error('ERROR DELETING EVENT', e);
   }
 };

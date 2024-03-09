@@ -236,7 +236,10 @@ export const postEvent = async (event: /* CreateEventSchema */ any) => {
     .replace(/ñ/g, 'n')
     .replace(/Ñ/g, 'N');
 
-  await createCalendarEvent({ ...event, client: { ...event.client, phone } });
+  const calendarEventId = await createCalendarEvent({
+    ...event,
+    client: { ...event.client, phone },
+  });
 
   await prisma.event.create({
     data: {
@@ -250,12 +253,24 @@ export const postEvent = async (event: /* CreateEventSchema */ any) => {
       price: event.price,
       paid: event.paid,
       observations: event.observations,
+      id_calendar_event: calendarEventId,
       client: {
         create: {
           name: event.client.name,
           phone,
         },
       },
+    },
+  });
+
+  revalidatePath('/next-events');
+  revalidatePath('/admin/events');
+};
+
+export const deleteEvent = async (id: string) => {
+  await prisma.event.delete({
+    where: {
+      id,
     },
   });
 

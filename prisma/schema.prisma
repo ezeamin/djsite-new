@@ -9,21 +9,22 @@ datasource db {
 }
 
 model Event {
-    id           String   @id @default(uuid())
-    title        String
-    date         DateTime
-    time         String
-    startTime    String
-    endTime      String
-    location     String
-    service      String
-    price        Float
-    paid         Float
-    observations String
-    id_client    String
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime @updatedAt
-    client       Client   @relation(fields: [id_client], references: [id])
+    id                String   @id @default(uuid())
+    title             String
+    date              DateTime
+    time              String
+    startTime         String
+    endTime           String
+    location          String
+    service           String
+    price             Float
+    paid              Float
+    observations      String
+    id_client         String
+    id_calendar_event String?   
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
+    client            Client   @relation(fields: [id_client], references: [id])
 }
 
 model Client {
