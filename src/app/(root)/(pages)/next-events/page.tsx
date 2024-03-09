@@ -5,6 +5,9 @@ import { getEvents } from '@/utilities';
 
 import { MinimalEvent } from '@/interface';
 
+// Revalidate events every 4 hours AND on event changes (revalidatePath directives)
+export const revalidate = 14400; // 4 * 60 * 60
+
 const NextEventsPage = async () => {
   // fetch events
   const events = (await getEvents({
