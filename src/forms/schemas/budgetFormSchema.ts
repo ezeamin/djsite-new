@@ -5,7 +5,7 @@ export const budgetFormSchema = z
   .object({
     date: dateRules(true),
     time: z.enum(['Dia', 'Noche'], {
-      errorMap: () => ({ message: 'Elegí de "día" o de "noche"' }),
+      errorMap: () => ({ message: 'Elegí el turno: "día" ó "noche"' }),
     }),
     location: z
       .string({

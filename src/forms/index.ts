@@ -1,5 +1,7 @@
 import { AuthFormSchema } from './schemas/authFormSchema';
 import { BudgetFormSchema } from './schemas/budgetFormSchema';
+import { CreateCompromiseSchema } from './schemas/createCompromiseSchema';
+import { CreateEventSchema } from './schemas/createEventSchema';
 import { DiscountCodesSchema } from './schemas/discountCodesSchema';
 
 /**
@@ -17,4 +19,6 @@ import { DiscountCodesSchema } from './schemas/discountCodesSchema';
 export type FormSchemas =
   | BudgetFormSchema
   | AuthFormSchema
-  | DiscountCodesSchema;
+  | DiscountCodesSchema
+  | CreateEventSchema
+  | CreateCompromiseSchema;

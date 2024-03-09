@@ -3,7 +3,10 @@
 import { revalidatePath } from 'next/cache';
 
 import { prisma } from './prisma';
-import { createCalendarEvent, sortEvents } from './utils';
+import { createCalendarEvent, deleteCalendarEvent, sortEvents } from './utils';
+
+import { CreateCompromiseSchema } from '@/forms/schemas/createCompromiseSchema';
+import { CreateEventSchema } from '@/forms/schemas/createEventSchema';
 
 import { Compromise, Event, MinimalEvent } from '@/interface';
 
@@ -225,9 +228,8 @@ export const getEvents = async ({
   return data;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const postEvent = async (event: /* CreateEventSchema */ any) => {
-  const phone = `+549${event.client.phone}`;
+export const postEvent = async (event: CreateEventSchema) => {
+  const phone = `+549${event.clientPhone}`;
 
   // replace ñ and accents
   const title = event.title
@@ -238,7 +240,8 @@ export const postEvent = async (event: /* CreateEventSchema */ any) => {
 
   const calendarEventId = await createCalendarEvent({
     ...event,
-    client: { ...event.client, phone },
+    date: event.date as unknown as Date,
+    client: { name: event.clientName, phone },
   });
 
   await prisma.event.create({
@@ -256,7 +259,7 @@ export const postEvent = async (event: /* CreateEventSchema */ any) => {
       id_calendar_event: calendarEventId,
       client: {
         create: {
-          name: event.client.name,
+          name: event.clientName,
           phone,
         },
       },
@@ -274,16 +277,15 @@ export const deleteEvent = async (id: string) => {
     },
   });
 
+  await deleteCalendarEvent(id);
+
   revalidatePath('/next-events');
   revalidatePath('/admin/events');
 };
 
 // COMPROMISE -----------------------------------
 
-export const postCompromise = async (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  compromise: /* CreateCompromiseSchema */ any
-) => {
+export const postCompromise = async (compromise: CreateCompromiseSchema) => {
   const reason = compromise.reason
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')

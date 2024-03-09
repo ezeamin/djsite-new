@@ -14,7 +14,7 @@ export interface Client {
   events: Event[];
 }
 export interface Event {
-  id: string;
+  id?: string;
   title: string;
   date: Date;
   time: 'Dia' | 'Noche' | string;
@@ -25,7 +25,7 @@ export interface Event {
   price: number;
   paid: number;
   observations: string;
-  id_client: string;
+  id_client?: string;
   client: {
     name: string;
     phone: string;
