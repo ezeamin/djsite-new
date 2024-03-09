@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 
 import { prisma } from './prisma';
-import { sortEvents } from './utils';
+import { createCalendarEvent, sortEvents } from './utils';
 
 import { Compromise, Event, MinimalEvent } from '@/interface';
 
@@ -235,6 +235,8 @@ export const postEvent = async (event: /* CreateEventSchema */ any) => {
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/ñ/g, 'n')
     .replace(/Ñ/g, 'N');
+
+  await createCalendarEvent({ ...event, client: { ...event.client, phone } });
 
   await prisma.event.create({
     data: {

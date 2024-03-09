@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { google } from 'googleapis';
 import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 import UAParser from 'ua-parser-js';
@@ -445,4 +446,87 @@ export const getEmoji = () => {
   const icons = ['🥳', '🎉', '🪅', '🎆', '🎈'];
 
   return icons[Math.floor(Math.random() * icons.length)];
+};
+
+export const createCalendarEvent = async (event: Event) => {
+  let UTCStartTime = Number(event.startTime.split(':')[0]) + 3;
+  let UTCEndTime = Number(event.endTime.split(':')[0]) + 3;
+
+  if (UTCStartTime > 24) UTCStartTime -= 24;
+  if (UTCEndTime > 24) UTCEndTime -= 24;
+
+  const formattedStartTime = `${UTCStartTime}:${event.startTime.split(':')[1]}`;
+  const formattedEndTime = `${UTCEndTime}:${event.endTime.split(':')[1]}`;
+
+  let isNextDay = false;
+  if (formattedEndTime < formattedStartTime) {
+    isNextDay = true;
+  }
+
+  const day = dayjs(event.date).format('YYYY-MM-DD');
+  const nextDay = dayjs(event.date).add(1, 'day').format('YYYY-MM-DD');
+
+  const start = dayjs(`${day}T${formattedStartTime}Z`);
+  const end = dayjs(`${isNextDay ? nextDay : day}T${formattedEndTime}Z`);
+
+  const eventData = {
+    summary: `Evento: ${event.title}`,
+    location: event.location,
+    description: `Cliente: ${event.client.name} - https://wa.me/${event.client.phone}`,
+    start: {
+      dateTime: start,
+      timeZone: 'America/Argentina/Tucuman',
+    },
+    end: {
+      dateTime: end,
+      timeZone: 'America/Argentina/Tucuman',
+    },
+    reminders: {
+      useDefault: false,
+      overrides: [
+        { method: 'popup', minutes: 1440 }, // 1 day
+        { method: 'popup', minutes: 240 }, // 4 hours
+      ],
+    },
+  };
+
+  // GOOGLE CALENDAR ------------------------------------------
+
+  const SCOPES = ['https://www.googleapis.com/auth/calendar'];
+  const {
+    GOOGLE_CLIENT_EMAIL,
+    GOOGLE_PRIVATE_KEY,
+    GOOGLE_PROJECT_NUMBER,
+    GOOGLE_CLIENT_ID,
+    GOOGLE_PRIVATE_KEY_ID,
+    GOOGLE_CALENDAR_ID,
+    GOOGLE_UNIVERSE_DOMAIN,
+  } = process.env;
+
+  const jwtClient = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: GOOGLE_CLIENT_EMAIL,
+      client_id: GOOGLE_CLIENT_ID,
+      projectId: GOOGLE_PROJECT_NUMBER,
+      private_key: GOOGLE_PRIVATE_KEY,
+      private_key_id: GOOGLE_PRIVATE_KEY_ID,
+      universeDomain: GOOGLE_UNIVERSE_DOMAIN,
+    },
+    scopes: SCOPES,
+  });
+
+  const calendar = google.calendar({
+    version: 'v3',
+    auth: jwtClient,
+  });
+
+  try {
+    // @ts-expect-error - this is a valid call
+    calendar.events.insert({
+      calendarId: GOOGLE_CALENDAR_ID,
+      resource: eventData,
+    });
+  } catch (e) {
+    console.error('ERROR INSERTING EVENT', e);
+  }
 };

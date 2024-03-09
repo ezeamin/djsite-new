@@ -19,6 +19,7 @@ import { sendPingMail } from './mailing';
 import {
   buildNavigationLink,
   calculateDistance,
+  createCalendarEvent,
   getAmountOfHours,
   getEmoji,
   manageBudgetResponse,
@@ -29,6 +30,7 @@ import { validateBudgetBody, validateDiscountCodeBody } from './validators';
 export {
   buildNavigationLink,
   calculateDistance,
+  createCalendarEvent,
   changeMessage,
   cn,
   deleteCompromise,
