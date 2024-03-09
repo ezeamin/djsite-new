@@ -2,8 +2,9 @@
 
 import { revalidatePath } from 'next/cache';
 
+import { createCalendarEvent, deleteCalendarEvent } from './google';
 import { prisma } from './prisma';
-import { createCalendarEvent, deleteCalendarEvent, sortEvents } from './utils';
+import { sortEvents } from './utils';
 
 import { CreateCompromiseSchema } from '@/forms/schemas/createCompromiseSchema';
 import { CreateEventSchema } from '@/forms/schemas/createEventSchema';
