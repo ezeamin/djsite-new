@@ -16,6 +16,20 @@ export const POST = async (req: Request): Promise<Response> => {
     );
   }
 
-  await postEvent(body);
-  return Response.json({});
+  const result = await postEvent(body);
+
+  if (!result) {
+    return Response.json(
+      {
+        data: null,
+        message: 'No se pudo crear el evento',
+      },
+      { status: 500 }
+    );
+  }
+
+  return Response.json({
+    data: result,
+    message: 'Evento creado correctamente',
+  });
 };

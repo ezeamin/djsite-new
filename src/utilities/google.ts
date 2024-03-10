@@ -35,8 +35,8 @@ export const createCalendarEvent = async (
   if (UTCStartTime > 24) UTCStartTime -= 24;
   if (UTCEndTime > 24) UTCEndTime -= 24;
 
-  const formattedStartTime = `${UTCStartTime}:${event.startTime.split(':')[1]}`;
-  const formattedEndTime = `${UTCEndTime}:${event.endTime.split(':')[1]}`;
+  const formattedStartTime = `${UTCStartTime.toString().padStart(2, '0')}:${event.startTime.split(':')[1]}:00.000`;
+  const formattedEndTime = `${UTCEndTime.toString().padStart(2, '0')}:${event.endTime.split(':')[1]}:00.000`;
 
   let isNextDay = false;
   if (formattedEndTime < formattedStartTime) {
@@ -46,8 +46,8 @@ export const createCalendarEvent = async (
   const day = dayjs(event.date).format('YYYY-MM-DD');
   const nextDay = dayjs(event.date).add(1, 'day').format('YYYY-MM-DD');
 
-  const start = dayjs(`${day}T${formattedStartTime}Z`);
-  const end = dayjs(`${isNextDay ? nextDay : day}T${formattedEndTime}Z`);
+  const start = `${day}T${formattedStartTime}Z`;
+  const end = `${isNextDay ? nextDay : day}T${formattedEndTime}Z`;
 
   const eventData = {
     summary: `Evento: ${event.title}`,

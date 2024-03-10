@@ -245,7 +245,11 @@ export const postEvent = async (event: CreateEventSchema) => {
     client: { name: event.clientName, phone },
   });
 
-  await prisma.event.create({
+  if (!calendarEventId) {
+    return null;
+  }
+
+  const createdData = await prisma.event.create({
     data: {
       title,
       date: event.date,
@@ -269,6 +273,8 @@ export const postEvent = async (event: CreateEventSchema) => {
 
   revalidatePath('/next-events');
   revalidatePath('/admin/events');
+
+  return createdData.id;
 };
 
 export const deleteEvent = async (id: string) => {
