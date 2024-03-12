@@ -3,6 +3,8 @@ import Title from '@/components/Common/Title';
 
 import { getBusyDates, getMessage } from '@/utilities';
 
+export const revalidate = 14400; // 4 * 60 * 60
+
 const BudgetPage = async () => {
   const busyDatesPromise = getBusyDates();
   const messagePromise = getMessage();
