@@ -54,7 +54,12 @@ const EventDescription = (props: EventDescriptionProps) => {
       <EventElement label="Teléfono" value={event.client.phone} />
       <div className="divider my-0" />
       <EventElement bold label="Precio" value={`$${event.price.toString()}`} />
-      <EventElement bold label="Pagado" value={`$${event.paid.toString()}`} />
+      <EventElement label="Pagado" value={`$${event.paid.toString()}`} />
+      <EventElement
+        bold
+        label="Pendiente"
+        value={`$${event.price - event.paid}`}
+      />
       <Link
         className={`three-d-button--red btn mb-2 mt-3 w-full ${koulen.className} text-lg text-white`}
         href={`${PATHS.ADMIN.CREATE.EVENT}/${event.id}`}

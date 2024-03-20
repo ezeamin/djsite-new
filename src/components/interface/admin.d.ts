@@ -1,3 +1,5 @@
+import { CreateEventSchema } from '@/forms/schemas/createEventSchema';
+
 import { Compromise, DiscountCode, Event } from '@/interface';
 
 export interface ChangeMessageProps {
@@ -35,4 +37,8 @@ export interface DiscountCodeFormProps {
 export interface DeleteDiscountCodeProps {
   id: DiscountCode['id'];
   code: DiscountCode['code'];
+}
+
+export interface CreateEventFormProps {
+  eventToModify?: CreateEventSchema;
 }

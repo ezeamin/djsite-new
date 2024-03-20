@@ -4,14 +4,15 @@ import { TypeOf, z } from 'zod';
 
 import { FormSchemas } from '@/forms';
 import { BudgetFormSchema } from '@/forms/schemas/budgetFormSchema';
+import { CreateEventSchema } from '@/forms/schemas/createEventSchema';
 
 export interface BudgetFormProps {
   busyDates: { time: string; date: Date }[];
 }
 
-export interface DateAndTimeFormProps<T extends BudgetFormSchema>
+export interface DateAndTimeFormProps<T extends FormSchemas>
   extends Omit<FormHandling<BudgetFormSchema, false>, 'name'> {
-  busyDates: { time: string; date: Date }[];
+  busyDates?: { time: string; date: Date }[];
   watch: UseFormWatch<BudgetFormSchema>;
 }
 

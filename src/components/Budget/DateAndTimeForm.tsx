@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 
 import DateInput from '../ui/DateInput/DateInput';
 import TimeForm from './TimeForm';
+import { Control } from 'react-hook-form';
 import { toast } from 'sonner';
 
+import { FormSchemas } from '@/forms';
 import { BudgetFormSchema } from '@/forms/schemas/budgetFormSchema';
 
 import { DateAndTimeFormProps } from '../interface/budget';
 
-const DateAndTimeForm = <T extends BudgetFormSchema>(
+const DateAndTimeForm = <T extends FormSchemas>(
   props: DateAndTimeFormProps<T>
 ) => {
   const { control, watch, busyDates } = props;
@@ -20,7 +22,7 @@ const DateAndTimeForm = <T extends BudgetFormSchema>(
 
   // Busy day detection
   useEffect(() => {
-    if (date && time) {
+    if (date && time && busyDates && busyDates.length > 0) {
       const busyTime = busyDates.find(
         (busyDate) =>
           busyDate.date.toDateString() === new Date(date).toDateString() &&
@@ -57,14 +59,17 @@ const DateAndTimeForm = <T extends BudgetFormSchema>(
         </label>
         {isBusy && <div className="badge badge-warning">Fecha ocupada 😶‍🌫️</div>}
       </div>
-      <DateInput<BudgetFormSchema>
+      <DateInput<T>
         hideLabel
-        control={control}
+        control={control as unknown as Control<T>}
         label="Fecha"
-        name="date"
+        name={'date' as keyof T}
         placeholder="dd/mm/aaaa"
       />
-      <TimeForm<BudgetFormSchema> control={control} name="time" />
+      <TimeForm<T>
+        control={control as unknown as Control<T>}
+        name={'time' as keyof T}
+      />
     </>
   );
 };
