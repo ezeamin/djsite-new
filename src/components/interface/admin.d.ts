@@ -1,3 +1,6 @@
+import { FormHandling } from './ui';
+
+import { FormSchemas } from '@/forms';
 import { CreateEventSchema } from '@/forms/schemas/createEventSchema';
 
 import { Compromise, DiscountCode, Event } from '@/interface';
@@ -42,3 +45,6 @@ export interface DeleteDiscountCodeProps {
 export interface CreateEventFormProps {
   eventToModify?: CreateEventSchema;
 }
+
+export interface StartAndEndFormProps<T extends FormSchemas>
+  extends FormHandling<T, false> {}

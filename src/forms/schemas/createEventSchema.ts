@@ -1,9 +1,9 @@
-import { hourRules, textRules } from '../rules/rules';
+import { dateRules, hourRules, textRules } from '../rules/rules';
 import { z } from 'zod';
 
 export const createEventSchema = z.object({
   title: textRules(true, 'Título', 3, 20),
-  date: z.string().trim().min(3),
+  date: dateRules(true),
   time: z.enum(['Dia', 'Noche'], {
     errorMap: () => ({ message: 'Elegí el turno: "día" ó "noche"' }),
   }),

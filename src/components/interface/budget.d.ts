@@ -23,10 +23,13 @@ export interface LocationFormProps<T extends FormSchemas>
   extends TimeFormProps<T> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setValue: UseFormSetValue<any>;
+  hideHelp?: boolean;
 }
 
 export interface HoursFormProps<T extends FormSchemas>
   extends TimeFormProps<T> {}
 
 export interface ServiceFormProps<T extends FormSchemas>
-  extends TimeFormProps<T> {}
+  extends TimeFormProps<T> {
+  hideHelp?: boolean;
+}

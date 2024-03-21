@@ -43,8 +43,8 @@ export const createCalendarEvent = async (
     isNextDay = true;
   }
 
-  const day = dayjs(event.date).format('YYYY-MM-DD');
-  const nextDay = dayjs(event.date).add(1, 'day').format('YYYY-MM-DD');
+  const day = dayjs(event.date).add(1, 'day').format('YYYY-MM-DD');
+  const nextDay = dayjs(event.date).add(2, 'day').format('YYYY-MM-DD');
 
   const start = `${day}T${formattedStartTime}Z`;
   const end = `${isNextDay ? nextDay : day}T${formattedEndTime}Z`;

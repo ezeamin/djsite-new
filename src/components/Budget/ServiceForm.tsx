@@ -6,7 +6,7 @@ import { FormSchemas } from '@/forms';
 import { ServiceFormProps } from '../interface/budget';
 
 const ServiceForm = <T extends FormSchemas>(props: ServiceFormProps<T>) => {
-  const { control, name } = props;
+  const { control, name, hideHelp = false } = props;
 
   return (
     <fieldset>
@@ -22,10 +22,12 @@ const ServiceForm = <T extends FormSchemas>(props: ServiceFormProps<T>) => {
           <RadioButtonInput control={control} label="Parlantes" name={name} />
         </Grid>
       </Grid>
-      <p className="mt-2 rounded bg-gray-800/25 px-3 py-2 text-sm">
-        El servicio básico es solo musicalización. No incluye parlantes. Ambos
-        requeriran una mesa adicional para el DJ.
-      </p>
+      {!hideHelp && (
+        <p className="mt-2 rounded bg-gray-800/25 px-3 py-2 text-sm">
+          El servicio básico es solo musicalización. No incluye parlantes. Ambos
+          requeriran una mesa adicional para el DJ.
+        </p>
+      )}
     </fieldset>
   );
 };

@@ -14,7 +14,7 @@ import { LocationFormProps } from '../interface/budget';
 const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
 
 const LocationForm = <T extends FormSchemas>(props: LocationFormProps<T>) => {
-  const { control, setValue, name } = props;
+  const { control, setValue, name, hideHelp = false } = props;
 
   const [query, setQuery] = useState('');
 
@@ -61,9 +61,11 @@ const LocationForm = <T extends FormSchemas>(props: LocationFormProps<T>) => {
           />
         )}
       </PlacesAutocomplete>
-      <p className="rounded bg-gray-800/25 px-3 py-2 text-sm">
-        Este campo usa Google Maps, y es sensible a acentos (perdón!)
-      </p>
+      {!hideHelp && (
+        <p className="rounded bg-gray-800/25 px-3 py-2 text-sm">
+          Este campo usa Google Maps, y es sensible a acentos (perdón!)
+        </p>
+      )}
     </>
   );
 };
