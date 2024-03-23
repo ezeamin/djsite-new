@@ -3,11 +3,14 @@ import EventDescription from '../Event/EventDescription';
 
 import { getEvents } from '@/utilities';
 
+import { EventListProps } from '@/components/interface/admin';
 import { Compromise, Event } from '@/interface';
 
-const EventList = async () => {
+const EventList = async (props: EventListProps) => {
+  const { finished = false } = props;
+
   const events = (await getEvents({
-    finished: false,
+    finished,
     fullData: true,
   })) as Event[] | Compromise[];
 
@@ -23,9 +26,13 @@ const EventList = async () => {
     <section className="mt-3">
       {events.map((event) =>
         'title' in event ? (
-          <EventDescription event={event} key={event.id} />
+          <EventDescription event={event} key={event.id} finished={finished} />
         ) : (
-          <CompromiseDescription compromise={event} key={event.id} />
+          <CompromiseDescription
+            compromise={event}
+            key={event.id}
+            finished={finished}
+          />
         )
       )}
     </section>

@@ -11,10 +11,16 @@ export interface ChangeMessageProps {
 
 export interface EventDescriptionProps {
   event: Event;
+  finished?: boolean;
 }
 
 export interface CompromiseDescriptionProps {
   compromise: Compromise;
+  finished?: boolean;
+}
+
+export interface EventListProps {
+  finished?: boolean;
 }
 
 export interface EventElementProps {

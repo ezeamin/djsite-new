@@ -406,10 +406,13 @@ export const manageBudgetResponse = async (
 
 export const sortEvents = (
   a: Event | Compromise | MinimalEvent,
-  b: Event | Compromise | MinimalEvent
+  b: Event | Compromise | MinimalEvent,
+  isPast = false
 ) => {
   // sort by date and by time ("Dia" should come before "Noche")
-  const dateDiff = a.date.getTime() - b.date.getTime();
+  const dateDiff = isPast
+    ? b.date.getTime() - a.date.getTime()
+    : a.date.getTime() - b.date.getTime();
 
   if (dateDiff === 0) {
     if (a.time === b.time) return 0;

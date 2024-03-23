@@ -1,6 +1,4 @@
-import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 
 import ChangeMessage from '@/components/Admin/Common/ChangeMessage';
 import EventList from '@/components/Admin/Common/EventList';
@@ -13,12 +11,7 @@ import { getMessage } from '@/utilities';
 import { koulen } from '@/styles/fonts';
 
 const AdminEventsPage = async () => {
-  const authCookie = cookies().get('auth');
   const message = await getMessage();
-
-  if (!authCookie) {
-    redirect(PATHS.HOME);
-  }
 
   return (
     <>

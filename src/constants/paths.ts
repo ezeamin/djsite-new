@@ -8,7 +8,7 @@ export const PATHS = {
   ADMIN: {
     AUTH: '/admin/auth',
     EVENTS: '/admin/events',
-    HISTORY: '/admin/history',
+    HISTORY: '/admin/events/history',
     DISCOUNT_CODES: '/admin/discount-codes',
     CREATE: {
       EVENT: '/admin/events/create',

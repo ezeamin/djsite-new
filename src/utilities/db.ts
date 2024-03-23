@@ -185,6 +185,14 @@ export const getEvents = async ({
         },
       },
     },
+    orderBy: [
+      {
+        date: 'desc',
+      },
+      {
+        time: 'asc',
+      },
+    ],
   });
 
   const compromisesPromise = prisma.compromise.findMany({
@@ -193,6 +201,11 @@ export const getEvents = async ({
         ...dateFilter,
       },
     },
+    orderBy: [
+      {
+        date: 'desc',
+      },
+    ],
   });
 
   const [events, compromises] = await Promise.all([
@@ -219,12 +232,16 @@ export const getEvents = async ({
       })
     );
 
-    const data = [...minimalEvents, ...minimalCompromises].sort(sortEvents);
+    const data = [...minimalEvents, ...minimalCompromises].sort((a, b) =>
+      sortEvents(a, b, finished)
+    );
 
     return data;
   }
 
-  const data = [...events, ...compromises].sort(sortEvents);
+  const data = [...events, ...compromises].sort((a, b) =>
+    sortEvents(a, b, finished)
+  );
 
   return data;
 };

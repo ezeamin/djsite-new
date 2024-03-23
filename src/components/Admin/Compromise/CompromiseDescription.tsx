@@ -12,7 +12,7 @@ import { koulen } from '@/styles/fonts';
 import { CompromiseDescriptionProps } from '../../interface/admin';
 
 const CompromiseDescription = (props: CompromiseDescriptionProps) => {
-  const { compromise } = props;
+  const { compromise, finished } = props;
 
   const formattedMainDate = new Date(compromise.date)
     .toLocaleDateString('es-AR', {
@@ -34,23 +34,25 @@ const CompromiseDescription = (props: CompromiseDescriptionProps) => {
       <div className="divider my-0" />
       <EventElement label="Fecha" value={formattedDetailsDate} />
       <EventElement label="Turno" value={compromise.time} />
-      <Grid container className="mt-3" component="section" gap={2}>
-        <Grid item xs={6}>
-          <Link
-            className={`three-d-button--gray btn w-full items-center ${koulen.className} text-lg text-white`}
-            href={`${PATHS.ADMIN.CREATE.COMPROMISE}/${compromise.id}`}
-            target="_blank"
-          >
-            MODIFICAR
-          </Link>
+      {!finished && (
+        <Grid container className="mt-3" component="section" gap={2}>
+          <Grid item xs={6}>
+            <Link
+              className={`three-d-button--gray btn w-full items-center ${koulen.className} text-lg text-white`}
+              href={`${PATHS.ADMIN.CREATE.COMPROMISE}/${compromise.id}`}
+              target="_blank"
+            >
+              MODIFICAR
+            </Link>
+          </Grid>
+          <Grid item xs={6}>
+            <DeleteCompromiseButton
+              id={compromise.id}
+              reason={compromise.reason}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <DeleteCompromiseButton
-            id={compromise.id}
-            reason={compromise.reason}
-          />
-        </Grid>
-      </Grid>
+      )}
     </article>
   );
 };

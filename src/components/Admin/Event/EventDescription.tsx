@@ -14,7 +14,7 @@ import { koulen } from '@/styles/fonts';
 import { EventDescriptionProps } from '../../interface/admin';
 
 const EventDescription = (props: EventDescriptionProps) => {
-  const { event } = props;
+  const { event, finished } = props;
 
   // From ISO to Vie 08 Mar without dayjs
   const formattedMainDate = new Date(event.date)
@@ -54,19 +54,31 @@ const EventDescription = (props: EventDescriptionProps) => {
       <EventElement label="Teléfono" value={event.client.phone} />
       <div className="divider my-0" />
       <EventElement bold label="Precio" value={`$${event.price.toString()}`} />
-      <EventElement label="Pagado" value={`$${event.paid.toString()}`} />
+      <EventElement
+        label="Pagado"
+        value={
+          finished ? `$${event.price.toString()}` : `$${event.paid.toString()}`
+        }
+      />
       <EventElement
         bold
         label="Pendiente"
-        value={`$${event.price - event.paid}`}
+        value={finished ? '$0' : `$${event.price - event.paid}`}
       />
-      <Link
-        className={`three-d-button--red btn mb-2 mt-3 w-full ${koulen.className} text-lg text-white`}
-        href={`${PATHS.ADMIN.CREATE.EVENT}/${event.id}`}
+      {!finished && (
+        <Link
+          className={`three-d-button--red btn mb-2 mt-3 w-full ${koulen.className} text-lg text-white`}
+          href={`${PATHS.ADMIN.CREATE.EVENT}/${event.id}`}
+        >
+          MODIFICAR
+        </Link>
+      )}
+      <Grid
+        container
+        className={finished ? 'mt-3' : ''}
+        component="section"
+        gap={2}
       >
-        MODIFICAR
-      </Link>
-      <Grid container component="section" gap={2}>
         <Grid item xs={6}>
           <Link
             className={`three-d-button--gray btn w-full items-center ${koulen.className} text-lg text-white`}
