@@ -246,6 +246,24 @@ export const getEvents = async ({
   return data;
 };
 
+export const getEvent = async (id: string) => {
+  const event = await prisma.event.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      client: {
+        select: {
+          name: true,
+          phone: true,
+        },
+      },
+    },
+  });
+
+  return event;
+};
+
 export const postEvent = async (event: CreateEventSchema) => {
   const phone = `+549${event.clientPhone}`;
 
@@ -292,6 +310,58 @@ export const postEvent = async (event: CreateEventSchema) => {
   revalidatePath('/admin/events');
 
   return createdData.id;
+};
+
+export const putEvent = async (event: CreateEventSchema, id: string) => {
+  const phone = `+549${event.clientPhone}`;
+
+  // replace ñ and accents
+  const title = event.title
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/ñ/g, 'n')
+    .replace(/Ñ/g, 'N');
+
+  // TODO: update calendar event
+  // const calendarEventId = await createCalendarEvent({
+  //   ...event,
+  //   date: event.date as unknown as Date,
+  //   client: { name: event.clientName, phone },
+  // });
+
+  // if (!calendarEventId) {
+  //   return null;
+  // }
+
+  await prisma.event.update({
+    where: {
+      id,
+    },
+    data: {
+      title,
+      date: event.date,
+      time: event.time,
+      startTime: event.startTime,
+      endTime: event.endTime,
+      location: event.location,
+      service: event.service,
+      price: event.price,
+      paid: event.paid,
+      observations: event.observations,
+      // id_calendar_event: calendarEventId,
+      client: {
+        update: {
+          name: event.clientName,
+          phone,
+        },
+      },
+    },
+  });
+
+  revalidatePath('/next-events');
+  revalidatePath('/admin/events');
+
+  return id;
 };
 
 export const deleteEvent = async (id: string) => {

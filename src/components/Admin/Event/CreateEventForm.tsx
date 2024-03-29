@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import StartAndEndForm from './StartAndEndForm';
 import { createPortal } from 'react-dom';
@@ -17,7 +17,7 @@ import TextAreaInput from '@/components/ui/TextAreaInput/TextAreaInput';
 import TextInput from '@/components/ui/TextInput/TextInput';
 
 import { PATHS } from '@/constants/paths';
-import { postEvent } from '@/utilities';
+import { postEvent, putEvent } from '@/utilities';
 
 import {
   CreateEventSchema,
@@ -30,6 +30,8 @@ import { CreateEventFormProps } from '@/components/interface/admin';
 
 const CreateEventForm = (props: CreateEventFormProps) => {
   const { eventToModify } = props;
+
+  const isModifying = !!eventToModify;
 
   const router = useRouter();
 
@@ -51,18 +53,42 @@ const CreateEventForm = (props: CreateEventFormProps) => {
   const handleSubmit = async (formData: CreateEventSchema) => {
     setIsLoading(true);
 
-    const eventId = await postEvent(formData);
+    let eventId;
+    if (isModifying) eventId = await putEvent(formData, eventToModify.id);
+    else eventId = await postEvent(formData);
 
     setIsLoading(false);
 
     if (!eventId) {
-      toast.error('Error al crear el evento');
+      toast.error(
+        isModifying
+          ? 'Error al actualizar el evento'
+          : 'Error al crear el evento'
+      );
       return;
     }
 
-    toast.success('Evento creado con éxito');
+    toast.success(
+      isModifying ? 'Evento modificado con éxito' : 'Evento creado con éxito'
+    );
     router.push(PATHS.ADMIN.EVENTS);
   };
+
+  // ---------------------------------------
+  // EFFECTS
+  // ---------------------------------------
+
+  useEffect(() => {
+    if (eventToModify) {
+      Object.keys(eventToModify).forEach((key) => {
+        // TODO: Date not being set
+        setValue(
+          key as keyof CreateEventSchema,
+          eventToModify[key as keyof CreateEventSchema]
+        );
+      });
+    }
+  }, [eventToModify, setValue]);
 
   // ---------------------------------------
   // RENDER

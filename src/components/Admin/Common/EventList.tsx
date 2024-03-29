@@ -26,12 +26,12 @@ const EventList = async (props: EventListProps) => {
     <section className="mt-3">
       {events.map((event) =>
         'title' in event ? (
-          <EventDescription event={event} key={event.id} finished={finished} />
+          <EventDescription event={event} finished={finished} key={event.id} />
         ) : (
           <CompromiseDescription
             compromise={event}
-            key={event.id}
             finished={finished}
+            key={event.id}
           />
         )
       )}

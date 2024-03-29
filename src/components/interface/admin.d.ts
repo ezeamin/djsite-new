@@ -49,7 +49,7 @@ export interface DeleteDiscountCodeProps {
 }
 
 export interface CreateEventFormProps {
-  eventToModify?: CreateEventSchema;
+  eventToModify?: CreateEventSchema & { id: string };
 }
 
 export interface StartAndEndFormProps<T extends FormSchemas>
