@@ -54,3 +54,7 @@ export interface CreateEventFormProps {
 
 export interface StartAndEndFormProps<T extends FormSchemas>
   extends FormHandling<T, false> {}
+
+export interface CreateCompromiseFormProps {
+  compromiseToModify?: Compromise & { id: string };
+}

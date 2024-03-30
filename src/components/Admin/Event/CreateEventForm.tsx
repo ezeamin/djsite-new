@@ -165,7 +165,7 @@ const CreateEventForm = (props: CreateEventFormProps) => {
         disabled={!areAllFieldsFilled}
         type="submit"
       >
-        CALCULAR
+        GUARDAR
       </button>
     </form>
   );

@@ -398,6 +398,33 @@ export const postCompromise = async (compromise: CreateCompromiseSchema) => {
   revalidatePath('/admin/events');
 };
 
+export const putCompromise = async (
+  compromise: CreateCompromiseSchema,
+  id: string
+) => {
+  const reason = compromise.reason
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/ñ/g, 'n')
+    .replace(/Ñ/g, 'N');
+
+  await prisma.compromise.update({
+    where: {
+      id,
+    },
+    data: {
+      reason,
+      date: compromise.date,
+      time: compromise.time,
+    },
+  });
+
+  revalidatePath('/next-events');
+  revalidatePath('/admin/events');
+
+  return id;
+};
+
 export const deleteCompromise = async (id: string) => {
   await prisma.compromise.delete({
     where: {

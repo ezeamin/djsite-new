@@ -12,7 +12,7 @@ export const PATHS = {
     DISCOUNT_CODES: '/admin/discount-codes',
     CREATE: {
       EVENT: '/admin/events/create',
-      COMPROMISE: '/admin/compromise/create',
+      COMPROMISE: '/admin/compromises/create',
     },
   },
 };

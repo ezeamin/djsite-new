@@ -4,7 +4,7 @@ import Title from '@/components/Common/Title';
 const CreateCompromisePage = () => {
   return (
     <>
-      <Title title="Nuevo evento" />
+      <Title title="Nuevo compromiso" />
       <CreateCompromiseForm />
     </>
   );

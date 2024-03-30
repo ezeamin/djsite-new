@@ -13,6 +13,7 @@ import {
   postCompromise,
   postDiscountCode,
   postEvent,
+  putCompromise,
   putEvent,
   validateDiscount,
 } from './db';
@@ -51,6 +52,7 @@ export {
   postCompromise,
   postDiscountCode,
   postEvent,
+  putCompromise,
   putEvent,
   removeLineBreaks,
   sendPingMail,
