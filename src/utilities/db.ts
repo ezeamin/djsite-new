@@ -386,7 +386,7 @@ export const postCompromise = async (compromise: CreateCompromiseSchema) => {
     .replace(/ñ/g, 'n')
     .replace(/Ñ/g, 'N');
 
-  await prisma.compromise.create({
+  const { id: createdCompromiseId } = await prisma.compromise.create({
     data: {
       reason,
       date: compromise.date,
@@ -396,6 +396,8 @@ export const postCompromise = async (compromise: CreateCompromiseSchema) => {
 
   revalidatePath('/next-events');
   revalidatePath('/admin/events');
+
+  return createdCompromiseId;
 };
 
 export const putCompromise = async (
