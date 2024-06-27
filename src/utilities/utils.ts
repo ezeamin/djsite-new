@@ -147,160 +147,162 @@ export const generateEventMailData = ({
         : ''
     }
   </div>
-  <table style="border-collapse: collapse; width: 100%; max-width: 500px; margin-bottom: 1rem;">
-    <tbody>
-      <tr>
-        <td
-          style="
-            border: 1px solid #ccc;
-            background-color: #f2f2f2;
-            padding: 0.5rem;
-            width: 135px;
-          "
-        >
-          Fecha
-        </td>
-        <td style="border: 1px solid #ccc; padding: 0.5rem">
-          ${weekDay} ${formattedDate}
-        </td>
-      </tr>
-      <tr>
-        <td
-          style="
-            border: 1px solid #ccc;
-            background-color: #f2f2f2;
-            padding: 0.5rem;
-            width: 135px;
-          "
-        >
-          Turno
-        </td>
-        <td style="border: 1px solid #ccc; padding: 0.5rem">
-          ${formData.time}
-        </td>
-      </tr>
-      <tr>
-        <td
-          style="
-            border: 1px solid #ccc;
-            background-color: #f2f2f2;
-            padding: 0.5rem;
-            width: 135px;
-          "
-        >
-          Ubicación
-        </td>
-        <td style="border: 1px solid #ccc; padding: 0.5rem">
-          <a href=${buildLocationMap(formData.location)}>
-          ${formData.location}
-          </a> (${distance}km)
-        </td>
-      </tr>
-      <tr>
-        <td
-          style="
-            border: 1px solid #ccc;
-            background-color: #f2f2f2;
-            padding: 0.5rem;
-            width: 135px;
-          "
-        >
-          Tiempo
-        </td>
-        <td style="border: 1px solid #ccc; padding: 0.5rem">
-          ${formData.hours} horas
-        </td>
-      </tr>
-      <tr>
-        <td
-          style="
-            border: 1px solid #ccc;
-            background-color: #f2f2f2;
-            padding: 0.5rem;
-            width: 135px;
-          "
-        >
-          Servicio
-        </td>
-        <td style="border: 1px solid #ccc; padding: 0.5rem">
-          ${formData.service}
-        </td>
-      </tr>
-      <tr>
-        <td
-          style="
-            border: 1px solid #ccc;
-            background-color: #f2f2f2;
-            padding: 0.5rem;
-            width: 135px;
-          "
-        >
-          Código de descuento
-        </td>
-        <td style="border: 1px solid #ccc; padding: 0.5rem">
-          ${formData.discountCode ? `${formData.discountCode.toUpperCase()} ${discount ? `- ✅ ${discount}%` : '- ❌'}` : 'N/A'}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <table style="border-collapse: collapse; width: 100%; max-width: 500px;">
-    <tbody>
-      <tr>
-        <td
-          style="
-            border: 1px solid #ccc;
-            background-color: #f2f2f2;
-            padding: 0.5rem;
-            width: 135px;
-          "
-        >
-          IP
-        </td>
-        <td style="border: 1px solid #ccc; padding: 0.5rem">${formattedIp}</td>
-      </tr>
-      <tr>
-        <td
-          style="
-            border: 1px solid #ccc;
-            background-color: #f2f2f2;
-            padding: 0.5rem;
-            width: 135px;
-          "
-        >
-          Navegador
-        </td>
-        <td style="border: 1px solid #ccc; padding: 0.5rem">${browser}</td>
-      </tr>
-      <tr>
-        <td
-          style="
-            border: 1px solid #ccc;
-            background-color: #f2f2f2;
-            padding: 0.5rem;
-            width: 135px;
-          "
-        >
-          OS
-        </td>
-        <td style="border: 1px solid #ccc; padding: 0.5rem">${os}</td>
-      </tr>
-      <tr>
-        <td
-          style="
-            border: 1px solid #ccc;
-            background-color: #f2f2f2;
-            padding: 0.5rem;
-            width: 135px;
-          "
-        >
-          Dispositivo
-        </td>
-        <td style="border: 1px solid #ccc; padding: 0.5rem">
-          ${device.vendor ? `${device.vendor || ''} ${device.model || ''} (${device.type || ''})` : 'N/A'}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <table style="border-collapse: collapse; width: 100%; max-width: 500px; margin-bottom: 1rem;">
+      <tbody>
+        <tr>
+          <td
+            style="
+              border: 1px solid #ccc;
+              background-color: #f2f2f2;
+              padding: 0.5rem;
+              width: 135px;
+            "
+          >
+            Fecha
+          </td>
+          <td style="border: 1px solid #ccc; padding: 0.5rem">
+            ${weekDay} ${formattedDate}
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid #ccc;
+              background-color: #f2f2f2;
+              padding: 0.5rem;
+              width: 135px;
+            "
+          >
+            Turno
+          </td>
+          <td style="border: 1px solid #ccc; padding: 0.5rem">
+            ${formData.time}
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid #ccc;
+              background-color: #f2f2f2;
+              padding: 0.5rem;
+              width: 135px;
+            "
+          >
+            Ubicación
+          </td>
+          <td style="border: 1px solid #ccc; padding: 0.5rem">
+            <a href=${buildLocationMap(formData.location)}>
+            ${formData.location}
+            </a> (${distance}km)
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid #ccc;
+              background-color: #f2f2f2;
+              padding: 0.5rem;
+              width: 135px;
+            "
+          >
+            Tiempo
+          </td>
+          <td style="border: 1px solid #ccc; padding: 0.5rem">
+            ${formData.hours} horas
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid #ccc;
+              background-color: #f2f2f2;
+              padding: 0.5rem;
+              width: 135px;
+            "
+          >
+            Servicio
+          </td>
+          <td style="border: 1px solid #ccc; padding: 0.5rem">
+            ${formData.service}
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid #ccc;
+              background-color: #f2f2f2;
+              padding: 0.5rem;
+              width: 135px;
+            "
+          >
+            Código de descuento
+          </td>
+          <td style="border: 1px solid #ccc; padding: 0.5rem">
+            ${formData.discountCode ? `${formData.discountCode.toUpperCase()} ${discount ? `- ✅ ${discount}%` : '- ❌'}` : 'N/A'}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table style="border-collapse: collapse; width: 100%; max-width: 500px;">
+      <tbody>
+        <tr>
+          <td
+            style="
+              border: 1px solid #ccc;
+              background-color: #f2f2f2;
+              padding: 0.5rem;
+              width: 135px;
+            "
+          >
+            IP
+          </td>
+          <td style="border: 1px solid #ccc; padding: 0.5rem">${formattedIp}</td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid #ccc;
+              background-color: #f2f2f2;
+              padding: 0.5rem;
+              width: 135px;
+            "
+          >
+            Navegador
+          </td>
+          <td style="border: 1px solid #ccc; padding: 0.5rem">${browser}</td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid #ccc;
+              background-color: #f2f2f2;
+              padding: 0.5rem;
+              width: 135px;
+            "
+          >
+            OS
+          </td>
+          <td style="border: 1px solid #ccc; padding: 0.5rem">${os}</td>
+        </tr>
+        <tr>
+          <td
+            style="
+              border: 1px solid #ccc;
+              background-color: #f2f2f2;
+              padding: 0.5rem;
+              width: 135px;
+            "
+          >
+            Dispositivo
+          </td>
+          <td style="border: 1px solid #ccc; padding: 0.5rem">
+            ${device.vendor ? `${device.vendor || ''} ${device.model || ''} (${device.type || ''})` : 'N/A'}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <p style="font-size: 0.75rem">${userAgent}</p>
 </main>
 `;
