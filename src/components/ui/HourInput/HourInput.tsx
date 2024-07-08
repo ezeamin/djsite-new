@@ -24,7 +24,7 @@ const HourInput = <T extends FormSchemas>(
   } = props;
 
   return (
-    <fieldset className={cn('form-control ', className)}>
+    <fieldset className={cn('form-control', className)}>
       <label className="text-lg" htmlFor={name as string}>
         {label}
       </label>
