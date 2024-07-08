@@ -2,7 +2,10 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { createCalendarEvent, deleteCalendarEvent } from './google';
+import {
+  /* createCalendarEvent , */
+  deleteCalendarEvent,
+} from './google';
 import { prisma } from './prisma';
 import { sortEvents } from './utils';
 
@@ -274,15 +277,16 @@ export const postEvent = async (event: CreateEventSchema) => {
     .replace(/ñ/g, 'n')
     .replace(/Ñ/g, 'N');
 
-  const calendarEventId = await createCalendarEvent({
-    ...event,
-    date: event.date as unknown as Date,
-    client: { name: event.clientName, phone },
-  });
+  // TODO: API broke (?)
+  // const calendarEventId = await createCalendarEvent({
+  //   ...event,
+  //   date: event.date as unknown as Date,
+  //   client: { name: event.clientName, phone },
+  // });
 
-  if (!calendarEventId) {
-    return null;
-  }
+  // if (!calendarEventId) {
+  //   return null;
+  // }
 
   const createdData = await prisma.event.create({
     data: {
@@ -296,7 +300,8 @@ export const postEvent = async (event: CreateEventSchema) => {
       price: event.price,
       paid: event.paid,
       observations: event.observations,
-      id_calendar_event: calendarEventId,
+      // TODO: id_calendar_event: calendarEventId,
+      id_calendar_event: Math.random().toString(),
       client: {
         create: {
           name: event.clientName,

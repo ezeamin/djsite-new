@@ -22,13 +22,9 @@ export const createEventSchema = z.object({
     .positive({
       message: 'El precio debe ser un número positivo',
     }),
-  paid: z.coerce
-    .number({
-      invalid_type_error: 'El precio pagado debe ser un número',
-    })
-    .positive({
-      message: 'El precio pagado debe ser un número positivo',
-    }),
+  paid: z.coerce.number({
+    invalid_type_error: 'El precio pagado debe ser un número',
+  }),
   observations: z.string().trim(),
   clientName: textRules(true, 'Nombre del cliente', 3, 45),
   clientPhone: textRules(true, 'Teléfono del cliente', 8, 15),
