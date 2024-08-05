@@ -147,7 +147,6 @@ export const generateEventMailData = ({
         : ''
     }
   </div>
-  <div style="display: flex; flex-direction: column; align-items: center;">
     <table style="border-collapse: collapse; width: 100%; max-width: 500px; margin-bottom: 1rem;">
       <tbody>
         <tr>
@@ -302,7 +301,6 @@ export const generateEventMailData = ({
         </tr>
       </tbody>
     </table>
-  </div>
   <p style="font-size: 0.75rem">${userAgent}</p>
 </main>
 `;
