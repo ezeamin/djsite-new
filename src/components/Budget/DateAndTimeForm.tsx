@@ -36,12 +36,29 @@ const DateAndTimeForm = <T extends FormSchemas>(
     }
   }, [date, time, busyDates]);
 
-  // Friday detection
+  // Friday detection -- disabled for now
+  // useEffect(() => {
+  //   const day = new Date(date).getDay();
+  //   if (day === 5) {
+  //     toast.info(
+  //       'Atención: Los viernes son de disponibilidad limitada gracias a mi querida facultad! 💀',
+  //       {
+  //         duration: 5000,
+  //       }
+  //     );
+  //   }
+  // }, [date]);
+
+  // More than two months detection
   useEffect(() => {
-    const day = new Date(date).getDay();
-    if (day === 5) {
+    const today = new Date();
+    const selectedDate = new Date(date);
+    const diffTime = Math.abs(selectedDate.getTime() - today.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays > 60) {
       toast.info(
-        'Atención: Los viernes son de disponibilidad limitada gracias a mi querida facultad! 💀',
+        'Atención: La fecha supera el mes de anticipación! El precio puede no ser el indicado',
         {
           duration: 5000,
         }

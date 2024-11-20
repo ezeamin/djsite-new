@@ -358,19 +358,16 @@ export const manageBudgetResponse = async (
     return;
   }
 
+  // Some random error
   if (res.status === 200 && !data.data) {
-    const action = await Swal.fire({
+    await Swal.fire({
       title: '😀🔫',
       html: data.message,
-      showCancelButton: true,
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Ok',
       confirmButtonColor: '#395aa8',
-      confirmButtonText: 'Okis, mandar WhatsApp 📲',
-      cancelButtonText: 'No gracias, soy aburrido 😔',
-      scrollbarPadding: false,
     });
-    if (action.isConfirmed) {
-      window.open(process.env.NEXT_PUBLIC_CONTACT_LINK, '_blank');
-    }
 
     return;
   }
