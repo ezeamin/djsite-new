@@ -35,7 +35,7 @@ const TermsBody = () => {
         </li>
         <li>
           Del importe, a excepción de servicio para bares y boliches, se abonan
-          $5.000 (incluidos), no reembolsable, a modo de seña por la reserva de
+          $10.000 (incluidos), no reembolsable, a modo de seña por la reserva de
           fecha. El resto del importe es abonado el mismo día del evento antes
           de iniciar el mismo. Este pago deberá comprender la totalidad de lo
           acordado. Puede hacerse en efectivo o por medio de transferencia
@@ -46,13 +46,12 @@ const TermsBody = () => {
           compromiso del artista, perder la fecha.
         </li>
         <li>
-          De cancelarse el evento, cualquiera sea el motivo, los $5.000 abonados
-          no son reembolsables, siendo el resto del valor pendiente de pago,
-          nulo.
+          De cancelarse el evento, cualquiera sea el motivo, la seña abonada no
+          es reembolsable, siendo el resto del valor pendiente de pago, nulo.
         </li>
         <li>
           En caso de cambio de fecha, sea por decisión o por fuerzas mayores al
-          organizador, se agregan $5.000 por cada vez que ésta se tenga que
+          organizador, se agregan $10.000 por cada vez que ésta se tenga que
           reprogramar, acorde a previa consulta de disponibilidad del DJ.
         </li>
         <li>
