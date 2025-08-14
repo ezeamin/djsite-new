@@ -35,7 +35,7 @@ import type { GridProps } from './Grid.types';
  * @param sm - How elements are sized and placed across grid columns using responsive design.
  * @param verticalAlign - How an individual flex or grid item is positioned along its container's cross axis.
  * @param xs - How elements are sized and placed across grid columns using responsive design.
- * @returns JSX.Element The rendered Icon component.
+ * @returns React.ReactElement The rendered Icon component.
  *
  * ```
  * @example
@@ -45,7 +45,7 @@ import type { GridProps } from './Grid.types';
  * ```
  */
 
-const Grid = (props: GridProps): JSX.Element => {
+const Grid = (props: GridProps): React.ReactElement => {
   const {
     alignContent = '',
     alignItems = '',

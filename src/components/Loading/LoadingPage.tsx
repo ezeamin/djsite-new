@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import Spinner from './Spinner/Spinner';
 
-const LoadingPage = (): JSX.Element => {
+const LoadingPage = (): React.ReactElement => {
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {

@@ -60,6 +60,12 @@ export interface DiscountCode {
   discount: number;
 }
 
-export interface PageProps {
-  searchParams: Record<string, string>;
+declare global {
+  type SearchParams = Record<string, string | undefined>;
+  type CatchAllParams = Record<string, [string] | undefined>;
+
+  type ServerComponentProps = {
+    searchParams: Promise<SearchParams>;
+    params: Promise<Record<string, string>>;
+  };
 }

@@ -13,7 +13,7 @@ import type { InputProps } from './DateInput.types';
 
 const DateInput = <T extends FormSchemas>(
   props: InputProps<T>
-): JSX.Element => {
+): React.ReactElement => {
   const {
     control,
     helperText = '',

@@ -4,9 +4,12 @@ import { deleteEvent } from '@/utilities';
 
 export const DELETE = async (
   _: Request,
-  { params: { id } }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ): Promise<Response> => {
-  const authorization = cookies().get('auth');
+  const { id } = await params;
+
+  const authorization = (await cookies()).get('auth');
+
   if (!authorization) {
     return Response.json(
       {

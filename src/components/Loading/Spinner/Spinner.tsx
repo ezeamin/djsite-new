@@ -1,6 +1,6 @@
 import './Spinner.styles.css';
 
-const Spinner = (): JSX.Element => {
+const Spinner = (): React.ReactElement => {
   return (
     <div className="sk-cube-grid">
       <div className="sk-cube sk-cube1 bg-white" />

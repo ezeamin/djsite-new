@@ -5,11 +5,10 @@ import { getEvent } from '@/utilities';
 
 import { CreateEventSchema } from '@/forms/schemas/createEventSchema';
 
-const EditEventPage = async ({
-  params: { id },
-}: {
-  params: { id: string };
-}) => {
+const EditEventPage = async (props: ServerComponentProps) => {
+  const { params } = await props;
+  const { id } = await params;
+
   const event = await getEvent(id);
 
   // TODO: Add error handling

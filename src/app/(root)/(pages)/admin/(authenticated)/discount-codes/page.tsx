@@ -6,13 +6,13 @@ import Title from '@/components/Common/Title';
 
 import { getDiscountCode } from '@/utilities';
 
-import { PageProps } from '@/interface';
+const DiscountCodesPage = async (props: ServerComponentProps) => {
+  const { searchParams } = await props;
+  const { id } = await searchParams;
 
-const DiscountCodesPage = async (props: PageProps) => {
-  const { searchParams } = props;
-  const discountCode = await getDiscountCode(searchParams.id);
+  const discountCode = await getDiscountCode(id);
 
-  if (searchParams.id && !discountCode) {
+  if (id && !discountCode) {
     redirect('/admin/discount-codes');
   }
 

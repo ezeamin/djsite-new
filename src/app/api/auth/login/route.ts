@@ -20,7 +20,7 @@ export const POST = async (request: Request): Promise<Response> => {
     );
   }
 
-  cookies().set('auth', 'true', {
+  (await cookies()).set('auth', 'true', {
     httpOnly: true,
     sameSite: 'strict',
     secure: true,

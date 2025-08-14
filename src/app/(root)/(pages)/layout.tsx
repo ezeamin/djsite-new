@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { ReactNode } from 'react';
 
-const layout = ({ children }: { children: ReactNode }) => {
+const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <header className="mb-3 mt-5">
@@ -17,4 +17,4 @@ const layout = ({ children }: { children: ReactNode }) => {
     </>
   );
 };
-export default layout;
+export default Layout;

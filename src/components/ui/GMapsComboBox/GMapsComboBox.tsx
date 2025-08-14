@@ -9,7 +9,7 @@ import type { GMapsComboBoxProps } from './GMapsComboBox.types';
 
 const GMapsComboBox = <T extends FormSchemas>(
   props: GMapsComboBoxProps<T>
-): JSX.Element => {
+): React.ReactElement => {
   const {
     className = '',
     control,

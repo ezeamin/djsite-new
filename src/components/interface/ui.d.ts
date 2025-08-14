@@ -1,9 +1,15 @@
-import type { Control, UseFormSetValue } from 'react-hook-form';
+import type {
+  Control,
+  FieldValues,
+  Path,
+  UseFormReturn,
+  UseFormSetValue,
+} from 'react-hook-form';
 
 import type { FormSchemas } from '@/forms';
 
-export type FormHandling<T extends FormSchemas, TisFile extends boolean> = {
-  control: Control<T>;
+export type FormHandling<T extends FieldValues, TisFile extends boolean> = {
+  control: UseFormReturn<T>['control'];
   name: keyof T;
 } & (TisFile extends true
   ? {

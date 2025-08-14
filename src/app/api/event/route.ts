@@ -5,7 +5,7 @@ import { postEvent } from '@/utilities/db';
 export const POST = async (req: Request): Promise<Response> => {
   const body = await req.json();
 
-  const authorization = cookies().get('auth');
+  const authorization = (await cookies()).get('auth');
   if (!authorization) {
     return Response.json(
       {

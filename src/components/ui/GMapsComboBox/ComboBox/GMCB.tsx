@@ -9,7 +9,9 @@ import { cn } from '@/utilities';
 
 import type { GMCBProps } from './GMCB.types';
 
-const GMCB = <T extends FieldValues>(props: GMCBProps<T>): JSX.Element => {
+const GMCB = <T extends FieldValues>(
+  props: GMCBProps<T>
+): React.ReactElement => {
   const {
     className,
     disabled = false,

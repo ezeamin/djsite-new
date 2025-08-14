@@ -9,7 +9,7 @@ const TermsBody = () => {
           deberá contactar directamente con el artista.
         </li>
         <li>
-          Por cada hora extra de servicio, se agregará un valor fijo de $10.000
+          Por cada hora extra de servicio, se agregará un valor fijo de $15.000
           bajo previa consulta con el DJ.
         </li>
         <li>
@@ -35,7 +35,7 @@ const TermsBody = () => {
         </li>
         <li>
           Del importe, a excepción de servicio para bares y boliches, se abonan
-          $10.000 (incluidos), no reembolsable, a modo de seña por la reserva de
+          $15.000 (incluidos), no reembolsable, a modo de seña por la reserva de
           fecha. El resto del importe es abonado el mismo día del evento antes
           de iniciar el mismo. Este pago deberá comprender la totalidad de lo
           acordado. Puede hacerse en efectivo o por medio de transferencia
@@ -51,7 +51,7 @@ const TermsBody = () => {
         </li>
         <li>
           En caso de cambio de fecha, sea por decisión o por fuerzas mayores al
-          organizador, se agregan $10.000 por cada vez que ésta se tenga que
+          organizador, se agregan $15.000 por cada vez que ésta se tenga que
           reprogramar, acorde a previa consulta de disponibilidad del DJ.
         </li>
         <li>

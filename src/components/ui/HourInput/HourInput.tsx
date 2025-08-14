@@ -11,7 +11,7 @@ import type { FormSchemas } from '@/forms';
 
 const HourInput = <T extends FormSchemas>(
   props: InputProps<T>
-): JSX.Element => {
+): React.ReactElement => {
   const {
     control,
     hideLabel = false,

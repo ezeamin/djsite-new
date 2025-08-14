@@ -4,8 +4,12 @@ import { ReactNode } from 'react';
 
 import { PATHS } from '@/constants/paths';
 
-const AuthenticatedAdminLayout = ({ children }: { children: ReactNode }) => {
-  const authCookie = cookies().get('auth');
+const AuthenticatedAdminLayout = async ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
+  const authCookie = (await cookies()).get('auth');
 
   if (!authCookie) {
     redirect(PATHS.HOME);

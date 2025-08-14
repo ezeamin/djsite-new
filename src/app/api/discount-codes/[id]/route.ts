@@ -4,11 +4,12 @@ import { prisma } from '@/utilities/prisma';
 
 export const PUT = async (
   request: Request,
-  { params: { id } }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ): Promise<Response> => {
   const body = await request.json();
+  const { id } = await params;
 
-  const authorization = cookies().get('auth');
+  const authorization = (await cookies()).get('auth');
   if (!authorization) {
     return Response.json(
       {

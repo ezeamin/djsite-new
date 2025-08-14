@@ -14,7 +14,7 @@ import type { ControllerProps } from './InputController.types';
 
 const InputController = <T extends FormSchemas>(
   props: ControllerProps<T>
-): JSX.Element => {
+): React.ReactElement => {
   const { name, control, defaultValue, render } = props;
 
   return (

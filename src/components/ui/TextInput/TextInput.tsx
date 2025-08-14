@@ -10,7 +10,7 @@ import type { InputProps } from './TextInput.types';
 
 const TextInput = <T extends FormSchemas>(
   props: InputProps<T>
-): JSX.Element => {
+): React.ReactElement => {
   const {
     className = '',
     control,

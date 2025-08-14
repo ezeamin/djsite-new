@@ -51,7 +51,7 @@ const optionsDefaultValues: OptionsDatePickerProps = {
  * @returns The DateTimePicker component.
  */
 
-const DatePicker = (props: DatePickerProps): JSX.Element => {
+const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const {
     className = '',
     error = false,

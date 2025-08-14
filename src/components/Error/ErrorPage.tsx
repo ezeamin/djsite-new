@@ -1,6 +1,6 @@
 // TODO: Recreate this page
 
-const ErrorPage = (): JSX.Element => {
+const ErrorPage = (): React.ReactElement => {
   return (
     <div>Error!</div>
     // <div>

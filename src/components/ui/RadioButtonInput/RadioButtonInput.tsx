@@ -10,7 +10,7 @@ import { InputProps } from '../TextInput/TextInput.types';
 
 const RadioButtonInput = <T extends FormSchemas>(
   props: InputProps<T>
-): JSX.Element => {
+): React.ReactElement => {
   const { className = '', control, name, label, defaultValue = '' } = props;
 
   return (
